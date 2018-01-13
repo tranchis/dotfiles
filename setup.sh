@@ -48,12 +48,13 @@ EOD
 
 cd $FOLDER
 cp .zshrc ~
+cp .spacemacs ~
 
 if [ -x "brew" ] ; then
 	/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 fi
 brew update
-brew install zsh zsh-completions zsh-autosuggestions
+brew bundle
 if ! grep -q .usr.local.bin.zsh /etc/shells; then
 	echo "/usr/local/bin/zsh" | sudo tee -a /etc/shells
 fi
@@ -63,5 +64,15 @@ chsh -s /usr/local/bin/zsh
 if [ ! -d ~/.oh-my-zsh/custom/themes/powerlevel9k ]; then
 	git clone https://github.com/bhilburn/powerlevel9k.git ~/.oh-my-zsh/custom/themes/powerlevel9k
 fi
+
+if [ ! -d "/Applications/Emacs.app/" ]; then
+	curl -L https://emacsformacosx.com/emacs-builds/Emacs-25.3-universal.dmg > /tmp/emacs.dmg
+	hdiutil attach /tmp/emacs.dmg
+	cp -R /Volumes/Emacs/Emacs.app /Applications/
+	hdiutil unmount /Volumes/Emacs
+fi
+
+rm -fR ~/.emacs.d
+git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d
 
 
