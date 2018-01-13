@@ -46,11 +46,14 @@ tell application "Terminal"
 end tell
 EOD
 
+cd $FOLDER
+cp .zshrc ~
+
 if [ -x "brew" ] ; then
 	/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 fi
 brew update
-brew install zsh zsh-completions
+brew install zsh zsh-completions zsh-autosuggestions
 if ! grep -q .usr.local.bin.zsh /etc/shells; then
 	echo "/usr/local/bin/zsh" | sudo tee -a /etc/shells
 fi
@@ -60,10 +63,5 @@ chsh -s /usr/local/bin/zsh
 if [ ! -d ~/.oh-my-zsh/custom/themes/powerlevel9k ]; then
 	git clone https://github.com/bhilburn/powerlevel9k.git ~/.oh-my-zsh/custom/themes/powerlevel9k
 fi
-
-if grep -q robbyrussell ~/.zshrc; then
-	sed -i -e 's/robbyrussell/powerlevel9k\/powerlevel9k/g' ~/.zshrc
-fi
-
 
 
