@@ -37,6 +37,7 @@ EOD
 cd $FOLDER
 cp .zshrc ~
 cp .spacemacs ~
+cp .gitconfig ~
 
 if [ -x "brew" ] ; then
 	/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
