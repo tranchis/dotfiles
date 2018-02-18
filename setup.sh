@@ -1,4 +1,6 @@
-#!/bin/sh
+#!/bin/sh 
+
+set -x #echo on
 
 FOLDER=`pwd`
 
@@ -22,6 +24,7 @@ tell application "Terminal"
 	set initialOpenedWindows to id of every window
 	do shell script "open '" & themeName & ".terminal'"
 	delay 1
+	(*
 	set default settings to settings set themeName
 	set allOpenedWindows to id of every window
 	repeat with windowID in allOpenedWindows
@@ -31,6 +34,7 @@ tell application "Terminal"
 			set current settings of tabs of (every window whose id is windowID) to settings set themeName
 		end if
 	end repeat
+	*)
 end tell
 EOD
 
@@ -40,7 +44,7 @@ cp .spacemacs ~
 cp .gitconfig ~
 cp .tmux.conf ~
 
-if [ -x "brew" ] ; then
+if ! [ -x "/usr/local/bin/brew" ] ; then
 	/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 fi
 brew update
@@ -62,7 +66,27 @@ if [ ! -d "/Applications/Emacs.app/" ]; then
 	hdiutil unmount /Volumes/Emacs
 fi
 
-rm -fR ~/.emacs.d
-git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d
+cd
+if [ ! -f "./.emacs.d/spacemacs.mk" ]; then
+	rm -fR ~/.emacs.d
+	git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d
+fi
+cd ~/.emacs.d/
+git pull
 
+if [ ! -d "/Applications/Adobe Creative Cloud/" ]; then
+	open "/usr/local/Caskroom/adobe-creative-cloud/latest/Creative Cloud Installer.app"
+fi
 
+if [ ! -d "/Applications/Battle.net.app/" ]; then
+	open "/usr/local/Caskroom/battle-net/latest/Battle.net-Setup.app"
+fi
+
+cd
+if [ ! -d "Dropbox/" ]; then
+	open "/Applications/Dropbox.app"
+fi
+
+# https://github.com/arrelid/preferences/blob/master/defaults.sh
+defaults write com.apple.finder ShowStatusBar -bool true
+defaults write com.apple.Safari IncludeDevelopMenu -bool true

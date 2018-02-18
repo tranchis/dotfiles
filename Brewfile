@@ -1,5 +1,26 @@
+cask_args appdir: "/Applications"
+
+tap "caskroom/homebrew-cask"
+tap "caskroom/cask"
+
 brew "zsh"
 brew "zsh-completions"
 brew "zsh-autosuggestions"
 brew "tmux"
 brew "mosh"
+brew "wget"
+brew "leiningen"
+
+cask "dropbox"
+cask "istat-menus"
+cask "caffeine"
+cask "java"
+cask "battle-net"
+cask "qbittorrent"
+cask "slack"
+cask "kindle"
+cask "evernote"
+cask "steam"
+cask "gog-galaxy"
+cask "adobe-creative-cloud"
+
