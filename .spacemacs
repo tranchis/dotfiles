@@ -48,7 +48,7 @@ This function should only modify configuration layer settings."
      git
      ;; markdown
      neotree
-     ;; org
+     org
      ;; (shell :variables
      ;;        shell-default-height 30
      ;;        shell-default-position 'bottom)
