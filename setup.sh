@@ -1,5 +1,4 @@
-#!/bin/sh 
-
+#!/bin/sh
 set -x #echo on
 
 FOLDER=`pwd`
@@ -24,7 +23,6 @@ tell application "Terminal"
 	set initialOpenedWindows to id of every window
 	do shell script "open '" & themeName & ".terminal'"
 	delay 1
-	(*
 	set default settings to settings set themeName
 	set allOpenedWindows to id of every window
 	repeat with windowID in allOpenedWindows
@@ -34,7 +32,6 @@ tell application "Terminal"
 			set current settings of tabs of (every window whose id is windowID) to settings set themeName
 		end if
 	end repeat
-	*)
 end tell
 EOD
 
@@ -44,7 +41,7 @@ cp .spacemacs ~
 cp .gitconfig ~
 cp .tmux.conf ~
 
-if ! [ -x "/usr/local/bin/brew" ] ; then
+if [ -x "brew" ] ; then
 	/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 fi
 brew update
@@ -53,6 +50,7 @@ if ! grep -q .usr.local.bin.zsh /etc/shells; then
 	echo "/usr/local/bin/zsh" | sudo tee -a /etc/shells
 fi
 curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | sh
+brew link zsh
 chsh -s /usr/local/bin/zsh
 
 if [ ! -d ~/.oh-my-zsh/custom/themes/powerlevel9k ]; then

@@ -24,3 +24,5 @@ cask "steam"
 cask "gog-galaxy"
 cask "adobe-creative-cloud"
 
+brew "sbt"
+brew "awscli"
