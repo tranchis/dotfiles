@@ -2,7 +2,7 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH=/Users/sergio/.oh-my-zsh
+export ZSH=~/.oh-my-zsh
 
 export TERM="xterm-256color"
 
@@ -107,3 +107,4 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias ee="/Applications/Emacs.app/Contents/MacOS/Emacs "$@""
+export PATH=~/bin/:$PATH
