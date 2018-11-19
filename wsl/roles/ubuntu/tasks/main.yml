@@ -1,0 +1,255 @@
+---
+- name: Download janus
+  get_url:
+    url: https://bit.ly/janus-bootstrap
+    dest: /tmp/janus-bootstrap.sh
+    mode: 0755
+
+- name: Install janus
+  shell: bash /tmp/janus-bootstrap.sh
+
+- name: Install base packages
+  package:
+    name: "{{ item }}"
+    state: latest
+  become: yes
+  with_items:
+    - rake
+    - git
+    - zsh
+
+- name: Set zsh as default
+  user:
+    shell: /usr/bin/zsh
+    name: "{{ lookup('env','USER') }}"
+  become: yes
+
+- name: Download oh my zsh
+  get_url:
+    url: https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh
+    dest: /tmp/oh-my-zsh.sh
+    mode: 0755
+
+- name: Fix oh my zsh script
+  replace:
+    path: /tmp/oh-my-zsh.sh
+    regexp: '(\s+)chsh(\s+.*)?$'
+    replace: '\1sudo chsh\2'
+
+- name: Install oh my zsh
+  shell: bash /tmp/oh-my-zsh.sh
+
+- name: Copy zshrc
+  template:
+    src: zshrc
+    dest: ~/.zshrc
+
+- name: Install powerline9k
+  git:
+    repo: https://github.com/bhilburn/powerlevel9k.git
+    dest: ~/.oh-my-zsh/custom/themes/powerlevel9k
+
+- name: Install autosuggestions
+  git:
+    repo: https://github.com/zsh-users/zsh-autosuggestions
+    dest: ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions
+
+- name: Fix permissions of autosuggestions
+  file:
+    path: ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions
+    owner: "{{ lookup('env','USER') }}"
+    group: "{{ lookup('env','USER') }}"
+    mode: 0755
+
+- name: Install vimrc.after
+  template:
+    src: vimrc.after
+    dest: ~/.vimrc.after
+
+- name: Install i3 packages
+  package:
+    name: "{{ item }}"
+    state: latest
+  become: yes
+  with_items:
+    - i3
+    - fonts-firacode
+    - libxcb1-dev
+    - libxcb-keysyms1-dev
+    - libpango1.0-dev
+    - libxcb-util0-dev
+    - libxcb-icccm4-dev
+    - libyajl-dev
+    - libstartup-notification0-dev
+    - libxcb-randr0-dev
+    - libev-dev
+    - libxcb-cursor-dev
+    - libxcb-xinerama0-dev
+    - libxcb-xkb-dev
+    - libxkbcommon-dev
+    - libxkbcommon-x11-dev
+    - autoconf
+    - libxcb-xrm0
+    - libxcb-xrm-dev
+    - automake
+    - x11-xserver-utils
+    - python3-pip
+    - python-pip
+    - rofi
+    - compton
+    - hsetroot
+
+- name: Create i3 config folder
+  file:
+    path: ~/.config/i3/
+    state: directory
+
+- name: Create polybar config folder
+  file:
+    path: ~/.config/polybar/
+    state: directory
+
+- name: Copy i3 config
+  template:
+    src: i3_config
+    dest: ~/.config/i3/config
+
+- name: Copy polybar config
+  template:
+    src: polybar_config
+    dest: ~/.config/polybar/config
+
+- name: Download hyper.js
+  get_url:
+    url: https://releases.hyper.is/download/deb
+    dest: /tmp/hyper.deb
+    mode: 0755
+
+- name: Install hyper.js
+  apt: deb="/tmp/hyper.deb"
+  become: yes
+
+- name: Set up ubuntu hyper
+  template:
+    src: hyper.js
+    dest: ~/.hyper.js
+
+- name: Clone i3 gaps
+  git:
+    repo: https://www.github.com/Airblader/i3
+    dest: ~/repos/i3-gaps
+
+- name: Autoreconf i3 gaps
+  shell: autoreconf --force --install
+  args:
+    chdir: ~/repos/i3-gaps
+
+- name: Create build dir for i3 gaps
+  file:
+    path: ~/repos/i3-gaps/build
+    state: directory
+
+- name: Configure i3 gaps
+  shell: ../configure --prefix=/usr --sysconfdir=/etc --disable-sanitizers
+  args:
+    chdir: ~/repos/i3-gaps/build
+
+- name: Make i3 gaps
+  shell: make
+  args:
+    chdir: ~/repos/i3-gaps/build
+
+- name: Install i3 gaps
+  shell: make install
+  become: yes
+  args:
+    chdir: "/home/{{ lookup('env','USER') }}/repos/i3-gaps/build"
+
+- name: Create scripts folder
+  file:
+    path: ~/.scripts
+    state: directory
+
+- name: Copy walternate script
+  template:
+    src: walternate
+    dest: ~/.scripts/walternate
+    mode: 0755
+
+- name: Copy polylaunch script
+  template:
+    src: polylaunch
+    dest: ~/.scripts/polylaunch
+    mode: 0755
+
+- name: Copy Xresources
+  template:
+    src: Xresources
+    dest: ~/.Xresources
+
+- name: i3 python deps
+  pip:
+    name: ephem
+    state: latest
+
+- name: Install polybar packages
+  package:
+    name: "{{ item }}"
+    state: latest
+  become: yes
+  with_items:
+    - cmake
+    - cmake-data
+    - pkg-config
+    - libcairo2-dev
+    - libxcb1-dev
+    - libxcb-util0-dev
+    - libxcb-randr0-dev
+    - libxcb-composite0-dev
+    - python-xcbgen
+    - xcb-proto
+    - libxcb-image0-dev
+    - libxcb-ewmh-dev
+    - libxcb-icccm4-dev
+    - libxcb-xkb-dev
+    - libxcb-xrm-dev
+    - libxcb-cursor-dev
+    - libasound2-dev
+    - libpulse-dev
+    - libjsoncpp-dev
+    - libmpdclient-dev
+    - libcurl4-openssl-dev
+    - libnl-genl-3-dev
+
+- name: Clone polybar
+  git:
+    repo: https://github.com/jaagr/polybar
+    dest: ~/repos/polybar
+
+- name: Create polybar build folder
+  file:
+    path: ~/repos/polybar/build
+    state: directory
+
+- name: Make polybar
+  shell: cmake ..
+  args:
+    chdir: ~/repos/polybar/build
+
+- name: Install polybar
+  shell: make install
+  become: yes
+  args:
+    chdir: "/home/{{ lookup('env','USER') }}/repos/polybar/build"
+
+- name: Clone termite
+  git:
+    repo: https://github.com/Corwind/termite-install.git
+    dest: ~/repos/termite-install
+
+- name: Install termite
+  shell: "/home/{{ lookup('env','USER') }}/repos/termite-install/termite-install.sh"
+  become: yes
+  args:
+    chdir: "/home/{{ lookup('env','USER') }}/repos/termite-install/"
+
