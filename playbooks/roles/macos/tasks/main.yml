@@ -11,7 +11,7 @@
 
 - name: Install casks
   homebrew_cask:
-    name: ['slack', 'dropbox', 'istat-menus', 'caffeine', 'java', 'discord', 'docker', 'hyper', 'font-fira-code']
+    name: ['slack', 'dropbox', 'istat-menus', 'caffeine', 'java', 'discord', 'docker', 'hyper', 'font-fira-code', 'virtualbox', 'vagrant']
     state: latest
 
 - name: Install trello
@@ -29,3 +29,5 @@
     state: link
   become: yes
 
+- name: Fix key repeat in hyper
+  shell: defaults write co.zeit.hyper ApplePressAndHoldEnabled -bool false
