@@ -1,0 +1,11 @@
+---
+- name: Setup laptop
+  hosts: local
+  remote_user: salvarez
+  become: no
+
+  roles:
+    - macos
+    - vim
+    - zsh
+

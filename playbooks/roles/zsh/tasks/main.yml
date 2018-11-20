@@ -1,0 +1,43 @@
+---
+- name: Set zsh as default
+  user:
+    shell: /usr/bin/zsh
+    name: "{{ lookup('env','USER') }}"
+  become: yes
+
+- name: Download oh my zsh
+  get_url:
+    url: https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh
+    dest: /tmp/oh-my-zsh.sh
+    mode: 0755
+
+- name: Fix oh my zsh script
+  replace:
+    path: /tmp/oh-my-zsh.sh
+    regexp: '(\s+)chsh(\s+.*)?$'
+    replace: '\1sudo chsh\2'
+
+- name: Install oh my zsh
+  shell: bash /tmp/oh-my-zsh.sh
+
+- name: Copy zshrc
+  template:
+    src: zshrc
+    dest: ~/.zshrc
+
+- name: Install powerline9k
+  git:
+    repo: https://github.com/bhilburn/powerlevel9k.git
+    dest: ~/.oh-my-zsh/custom/themes/powerlevel9k
+
+- name: Install autosuggestions
+  git:
+    repo: https://github.com/zsh-users/zsh-autosuggestions
+    dest: ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions
+
+- name: Fix permissions of autosuggestions
+  file:
+    path: ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions
+    owner: "{{ lookup('env','USER') }}"
+    mode: 0755
+

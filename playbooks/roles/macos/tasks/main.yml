@@ -1,0 +1,31 @@
+---
+- name: Install packages
+  homebrew:
+    name: ['zsh', 'zsh-completions', 'zsh-autosuggestions', 'tmux', 'mosh', 'wget', 'leiningen', 'mas']
+    state: latest
+
+- name: Tap fonts
+  homebrew_tap:
+    name: caskroom/fonts
+    state: present
+
+- name: Install casks
+  homebrew_cask:
+    name: ['slack', 'dropbox', 'istat-menus', 'caffeine', 'java', 'discord', 'docker', 'hyper', 'font-fira-code']
+    state: latest
+
+- name: Install trello
+  shell: mas install 1278508951
+
+- name: Copy hyper.js config
+  template:
+    src: hyper.js
+    dest: ~/.hyper.js
+
+- name: Link zsh
+  file:
+    path: /usr/bin/zsh
+    src: /usr/local/bin/zsh
+    state: link
+  become: yes
+

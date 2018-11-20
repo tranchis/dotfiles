@@ -1,0 +1,6 @@
+---
+- hosts: local
+  roles:
+    - ubuntu
+    - vim
+    - zsh
