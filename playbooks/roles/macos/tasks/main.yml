@@ -11,7 +11,7 @@
 
 - name: Install casks
   homebrew_cask:
-    name: ['slack', 'dropbox', 'istat-menus', 'caffeine', 'java', 'discord', 'docker', 'hyper', 'font-fira-code', 'virtualbox', 'vagrant', 'firefox']
+    name: ['slack', 'dropbox', 'istat-menus', 'caffeine', 'java', 'discord', 'docker', 'hyper', 'font-fira-code', 'virtualbox', 'vagrant', 'firefox', 'emacs', 'papers']
     state: latest
 
 - name: Install trello
