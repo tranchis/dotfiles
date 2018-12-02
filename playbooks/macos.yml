@@ -6,6 +6,7 @@
 
   roles:
     - macos
+    - macos-opt
     - vim
     - spacemacs
     - zsh
