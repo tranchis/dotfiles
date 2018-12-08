@@ -1,4 +1,13 @@
 ---
-- name: Install opt casks
+- name: Install opt apps
   homebrew:
     name: ['minio/stable/mc']
+
+- name: Install Numbers
+  shell: mas install 409203825
+
+- name: Install Pages
+  shell: mas install 409201541
+
+- name: Install Xcode
+  shell: mas install 497799835
