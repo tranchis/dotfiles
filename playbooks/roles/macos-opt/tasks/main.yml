@@ -11,3 +11,6 @@
 
 - name: Install Xcode
   shell: mas install 497799835
+
+- name: Install RDP Client
+  shell: mas install 1295203466
