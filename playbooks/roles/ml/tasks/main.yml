@@ -1,0 +1,15 @@
+---
+- name: Make sure python3.7 is not installed
+  homebrew:
+    name: python
+    state: unlinked
+
+- name: Install python3.6
+  shell: brew install https://raw.githubusercontent.com/Homebrew/homebrew-core/f2a764ef944b1080be64bd88dca9a1d80130c558/Formula/python.rb
+
+- name: Install virtualenv
+  pip:
+    name: virtualenv
+    executable: pip3
+    state: latest
+
