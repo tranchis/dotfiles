@@ -10,6 +10,5 @@
 - name: Install virtualenv
   pip:
     name: virtualenv
-    executable: pip3
     state: latest
 
