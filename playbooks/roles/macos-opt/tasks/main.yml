@@ -3,6 +3,13 @@
   homebrew:
     name: ['minio/stable/mc']
 
+- name: Install opt casks
+  homebrew_cask:
+    name: ['gog-galaxy']
+
+- name: Install Keynote
+  shell: mas install 409183694
+
 - name: Install Numbers
   shell: mas install 409203825
 
