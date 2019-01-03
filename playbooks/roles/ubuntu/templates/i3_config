@@ -140,7 +140,7 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 
 exec --no-startup-id exec hsetroot -solid black
-exec --no-startup-id exec compton -cCGfF -b -i 0.9 --vsync opengl
+exec --no-startup-id exec compton -cCGfF -b -i 0.8 --vsync opengl
 exec_always --no-startup-id exec xrdb -load ~/.Xresources
 exec_always --no-startup-id exec ~/.scripts/polylaunch
 exec --no-startup-id exec ~/.scripts/walternate

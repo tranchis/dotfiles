@@ -9,6 +9,7 @@
     - git
     - zsh
     - vim
+    - ranger
 
 - name: Install i3 packages
   package:
@@ -44,6 +45,26 @@
     - hsetroot
     - scrot
     - feh
+    - xautolock
+    - fonts-materialdesignicons-webfont
+    - rxvt-unicode
+
+- name: Create bin folder
+  file:
+    path: ~/bin/
+    state: directory
+
+- name: Install tdrop
+  get_url:
+    url: https://raw.githubusercontent.com/noctuid/tdrop/master/tdrop
+    dest: ~/bin/tdrop
+    mode: 0755
+
+- name: Install bartermapp
+  template:
+    src: bartermapp
+    dest: ~/bin/bartermapp
+    mode: 0755
 
 - name: Create i3 config folder
   file:

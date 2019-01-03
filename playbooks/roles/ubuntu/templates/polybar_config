@@ -1,5 +1,5 @@
 [colors]
-background = #cc000000
+background = #33000000
 background-alt = #cc000000
 foreground = #dfdfdf
 foreground-alt = #555
@@ -31,8 +31,10 @@ module-margin-left = 1
 module-margin-right = 1
 
 font-0 = fixed:normal:pixelsize=12
+font-1 = M+ 1mn:pixelsize=12;3
+font-2 = "Material Design Icons:size=12:antialias=false"
 
-modules-left = i3
+modules-left = i3 ranger
 modules-center = xwindow
 modules-right = filesystem cpu memory
 
@@ -41,6 +43,12 @@ tray-position = left
 tray-padding = 2
 tray-transparent = false
 tray-background = #000
+
+[module/ranger]
+type = custom/text
+content = %{F#666}2%{F-} 
+click-left = bartermapp ranger 2
+content-underline = #f00
 
 [module/xwindow]
 type = internal/xwindow
