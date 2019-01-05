@@ -5,7 +5,7 @@
 
 - name: Install opt casks
   homebrew_cask:
-    name: ['gog-galaxy']
+    name: ['gog-galaxy', 'grandperspective']
 
 - name: Install Keynote
   shell: mas install 409183694
