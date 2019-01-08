@@ -139,6 +139,8 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
+for_window [class="URxvt"] floating enable border pixel 3
+
 exec --no-startup-id exec hsetroot -solid black
 exec --no-startup-id exec compton -cCGfF -b -i 0.8 --vsync opengl
 exec_always --no-startup-id exec xrdb -load ~/.Xresources
