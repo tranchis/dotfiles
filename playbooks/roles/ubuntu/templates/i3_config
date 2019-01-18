@@ -152,3 +152,10 @@ exec xautolock -time 15 -locker '~/.config/i3/fuzzy_lock.sh' &
 
 exec_always --no-startup-id exec feh --bg-scale ~/.config/wallpapers/mojave-night.jpg
 
+assign [class="Slack"] 2
+assign [class="Thunderbird"] 2
+
+exec slack
+exec thunderbird
+exec alacritty
+exec firefox
