@@ -10,7 +10,7 @@
     - zsh
     - vim
     - ranger
-    - leiningen
+    - emacs
 
 - name: Install i3 packages
   package:
