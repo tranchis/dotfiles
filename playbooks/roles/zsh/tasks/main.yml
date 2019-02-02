@@ -1,7 +1,7 @@
 ---
 - name: Set zsh as default
   user:
-    shell: /usr/bin/zsh
+    shell: /usr/local/bin/zsh
     name: "{{ lookup('env','USER') }}"
   become: yes
 
