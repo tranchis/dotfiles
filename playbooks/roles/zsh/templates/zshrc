@@ -101,3 +101,6 @@ source $ZSH/oh-my-zsh.sh
 
 export DISPLAY=:0.0
 export PATH=~/bin/:$PATH
+export WORKON_HOME=~/Envs
+
+source `which virtualenvwrapper.sh`

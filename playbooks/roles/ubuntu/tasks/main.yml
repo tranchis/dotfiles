@@ -17,6 +17,26 @@
     - ranger
     - emacs26
 
+- name: Install python packages
+  package:
+    name: "{{ item }}"
+    state: latest
+  become: yes
+  with_items:
+    - python3-pip
+    - python-pip
+    - python-virtualenv
+    - virtualenvwrapper
+
+- name: Install python modules
+  pip:
+    name: "{{ item }}"
+    state: latest
+  become: yes
+  with_items:
+    - virtualenv
+    - virtualenvwrapper
+
 - name: Install i3 packages
   package:
     name: "{{ item }}"
