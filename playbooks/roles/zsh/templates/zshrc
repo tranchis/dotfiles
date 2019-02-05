@@ -104,3 +104,4 @@ export PATH=~/bin/:$PATH
 export WORKON_HOME=~/Envs
 
 source `which virtualenvwrapper.sh`
+eval "$(pyenv init -)"

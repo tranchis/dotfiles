@@ -4,6 +4,12 @@
     name: ['the_silver_searcher', 'zsh', 'zsh-completions', 'zsh-autosuggestions', 'tmux', 'mosh', 'wget', 'leiningen', 'mas', 'telnet', 'git-lfs']
     state: latest
 
+- name: Add zsh to /etc/shells
+  become: yes
+  lineinfile:
+    path: /etc/shells
+    line: '/usr/local/bin/zsh'
+
 - name: Change shell
   become_user: root
   command: "chsh -s /usr/local/bin/zsh {{ lookup('env','USER') }}"
