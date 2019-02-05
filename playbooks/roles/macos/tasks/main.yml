@@ -22,11 +22,11 @@
 - name: Tap versions
   homebrew_tap:
     name: caskroom/versions
-    state: present
+    state: absent
 
 - name: Install casks
   homebrew_cask:
-    name: ['java8', 'slack', 'dropbox', 'istat-menus', 'caffeine', 'java', 'discord', 'docker', 'hyper', 'font-fira-code', 'virtualbox', 'vagrant', 'firefox', 'emacs', 'papers', 'amethyst']
+    name: ['jumpcut', 'java8', 'slack', 'dropbox', 'istat-menus', 'caffeine', 'java', 'discord', 'docker', 'hyper', 'font-fira-code', 'virtualbox', 'vagrant', 'firefox', 'emacs', 'papers', 'amethyst']
     state: latest
 
 - name: Install pip
