@@ -1,14 +1,20 @@
 ---
-- name: Make sure python3.7 is not installed
+- name: Install caffe and python
   homebrew:
-    name: python
-    state: unlinked
+    name: ['caffe', 'python', 'zlib', 'pyenv']
+    state: latest
 
-- name: Install python3.6
-  shell: brew install --ignore-dependencies https://raw.githubusercontent.com/Homebrew/homebrew-core/f2a764ef944b1080be64bd88dca9a1d80130c558/Formula/python.rb
+- name: Install zlib at os level
+  become: yes
+  command: installer -pkg /Library/Developer/CommandLineTools/Packages/macOS_SDK_headers_for_macOS_10.14.pkg -target /
 
 - name: Install virtualenv
   pip:
     name: virtualenv
+    state: latest
+
+- name: Install virtualenvwrapper
+  pip:
+    name: virtualenvwrapper
     state: latest
 
