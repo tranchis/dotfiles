@@ -1,7 +1,7 @@
 ---
 - name: Install packages
   homebrew:
-    name: ['zsh', 'zsh-completions', 'zsh-autosuggestions', 'tmux', 'mosh', 'wget', 'leiningen', 'mas', 'telnet', 'git-lfs']
+    name: ['the_silver_searcher', 'zsh', 'zsh-completions', 'zsh-autosuggestions', 'tmux', 'mosh', 'wget', 'leiningen', 'mas', 'telnet', 'git-lfs']
     state: latest
 
 - name: Change shell
@@ -13,9 +13,14 @@
     name: caskroom/fonts
     state: present
 
+- name: Tap versions
+  homebrew_tap:
+    name: caskroom/versions
+    state: present
+
 - name: Install casks
   homebrew_cask:
-    name: ['slack', 'dropbox', 'istat-menus', 'caffeine', 'java', 'discord', 'docker', 'hyper', 'font-fira-code', 'virtualbox', 'vagrant', 'firefox', 'emacs', 'papers', 'amethyst']
+    name: ['java8', 'slack', 'dropbox', 'istat-menus', 'caffeine', 'java', 'discord', 'docker', 'hyper', 'font-fira-code', 'virtualbox', 'vagrant', 'firefox', 'emacs', 'papers', 'amethyst']
     state: latest
 
 - name: Install pip

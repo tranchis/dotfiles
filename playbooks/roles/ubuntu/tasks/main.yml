@@ -143,21 +143,6 @@
     src: polybar_config
     dest: ~/.config/polybar/config
 
-- name: Download hyper.js
-  get_url:
-    url: https://releases.hyper.is/download/deb
-    dest: /tmp/hyper.deb
-    mode: 0755
-
-- name: Install hyper.js
-  apt: deb="/tmp/hyper.deb"
-  become: yes
-
-- name: Set up ubuntu hyper
-  template:
-    src: hyper.js
-    dest: ~/.hyper.js
-
 - name: Clone i3 gaps
   git:
     repo: https://www.github.com/Airblader/i3
