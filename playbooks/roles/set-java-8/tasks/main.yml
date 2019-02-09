@@ -1,0 +1,7 @@
+---
+- name: Set Java 8
+  lineinfile:
+    path: ~/.zshrc
+    line: 'export JAVA_HOME=`/usr/libexec/java_home -v 1.8`'
+    create: yes
+    state: present
