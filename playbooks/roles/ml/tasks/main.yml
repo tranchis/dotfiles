@@ -7,6 +7,7 @@
 - name: Install zlib at os level
   become: yes
   command: installer -pkg /Library/Developer/CommandLineTools/Packages/macOS_SDK_headers_for_macOS_10.14.pkg -target /
+  ignore_errors: yes
 
 - name: Install virtualenv
   pip:
