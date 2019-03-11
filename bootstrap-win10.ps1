@@ -7,7 +7,7 @@ Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-L
 choco upgrade --allow-empty-checksums -y battle.net
 choco upgrade -y firefox battle.net hyper vim steam git git-lfs firacode virtualbox itunes thunderbird goggalaxy slack virtualbox.extensionpack lastpass vcxsrv
 
-if(!(Test-Path c:\windows\system32\bash.exe)) {
+if(!(Test-Path ~/Ubuntu/ubuntu1804.exe)) {
   Invoke-WebRequest -Uri https://aka.ms/wsl-ubuntu-1804 -OutFile ~/Ubuntu.appx -UseBasicParsing
   Rename-Item ~/Ubuntu.appx Ubuntu.zip
   Expand-Archive ~/Ubuntu.zip ~/Ubuntu

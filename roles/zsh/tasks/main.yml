@@ -1,7 +1,11 @@
 ---
+- name: Store zsh path
+  shell: which zsh
+  register: zsh_path
+
 - name: Set zsh as default
   user:
-    shell: /usr/local/bin/zsh
+    shell: "{{ zsh_path.stdout }}"
     name: "{{ lookup('env','USER') }}"
   become: yes
 

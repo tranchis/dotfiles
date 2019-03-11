@@ -16,6 +16,7 @@
     - vim
     - ranger
     - emacs26
+    - x11-xkb-utils
 
 - name: Install python packages
   package:
@@ -43,37 +44,38 @@
     state: latest
   become: yes
   with_items:
-    - i3
+    - autoconf
+    - automake
+    - compton
+    - feh
     - fonts-firacode
-    - libxcb1-dev
-    - libxcb-keysyms1-dev
-    - libpango1.0-dev
-    - libxcb-util0-dev
-    - libxcb-icccm4-dev
-    - libyajl-dev
-    - libstartup-notification0-dev
-    - libxcb-randr0-dev
+    - fonts-materialdesignicons-webfont
+    - hsetroot
+    - i3
     - libev-dev
+    - libpango1.0-dev
+    - libstartup-notification0-dev
     - libxcb-cursor-dev
+    - libxcb-icccm4-dev
+    - libxcb-keysyms1-dev
+    - libxcb-randr0-dev
+    - libxcb-shape0-dev
+    - libxcb-util0-dev
     - libxcb-xinerama0-dev
     - libxcb-xkb-dev
+    - libxcb-xrm-dev
+    - libxcb-xrm0
+    - libxcb1-dev
     - libxkbcommon-dev
     - libxkbcommon-x11-dev
-    - autoconf
-    - libxcb-xrm0
-    - libxcb-xrm-dev
-    - automake
-    - x11-xserver-utils
-    - python3-pip
+    - libyajl-dev
     - python-pip
+    - python3-pip
     - rofi
-    - compton
-    - hsetroot
-    - scrot
-    - feh
-    - xautolock
-    - fonts-materialdesignicons-webfont
     - rxvt-unicode
+    - scrot
+    - x11-xserver-utils
+    - xautolock
 
 - name: Create bin folder
   file:
@@ -282,7 +284,7 @@
 - name: Download wallpapers
   get_url:
     url: "{{ item }}"
-    dest: ~/.config/wallpapers/
+    dest: ~/.config/wallpapers/mojave-night.jpg
   with_items:
     - "https://9to5mac.com/wp-content/uploads/sites/6/2018/06/mojave-night.jpg"
 
