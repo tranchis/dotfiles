@@ -3,3 +3,8 @@
   git:
     repo: https://github.com/pyenv/pyenv.git
     dest: ~/.pyenv
+
+- name: Install bzip2 devel
+  apt:
+    name: libbz2-dev
+  become: yes
