@@ -100,7 +100,8 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 export DISPLAY=:0.0
-export PATH=~/bin/:$PATH
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH=~/bin/:$PYENV_ROOT/bin:/snap/bin/:$PATH
 export WORKON_HOME=~/Envs
 
 source `which virtualenvwrapper.sh`
