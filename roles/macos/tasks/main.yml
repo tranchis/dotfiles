@@ -1,7 +1,12 @@
 ---
+- name: Accept xcodebuild license
+  shell: xcodebuild -license accept
+  ignore_errors: yes
+  become: yes
+
 - name: Install packages
   homebrew:
-    name: ['inetutils', 'the_silver_searcher', 'zsh', 'zsh-completions', 'zsh-autosuggestions', 'tmux', 'mosh', 'wget', 'leiningen', 'mas', 'telnet', 'git-lfs']
+    name: ['inetutils', 'the_silver_searcher', 'zsh', 'zsh-completions', 'zsh-autosuggestions', 'tmux', 'mosh', 'wget', 'leiningen', 'mas', 'git-lfs']
     state: latest
 
 - name: Add zsh to /etc/shells
@@ -26,22 +31,22 @@
 
 - name: Install casks
   homebrew_cask:
-    name: ['jumpcut', 'java8', 'slack', 'dropbox', 'istat-menus', 'caffeine', 'java', 'discord', 'docker', 'hyper', 'font-fira-code', 'virtualbox', 'vagrant', 'firefox', 'emacs', 'papers', 'amethyst']
+    name: ['jumpcut', 'slack', 'dropbox', 'istat-menus', 'caffeine', 'java', 'discord', 'docker', 'hyper', 'font-fira-code', 'virtualbox', 'vagrant', 'firefox', 'emacs', 'papers', 'amethyst', 'battle-net']
+    state: latest
+
+- name: Tap versions
+  homebrew_tap:
+    name: caskroom/versions
+    state: present
+
+- name: Install casks with versions
+  homebrew_cask:
+    name: ['java8']
     state: latest
 
 - name: Install pip
   shell: easy_install pip
   become: yes
-
-- name: Uninstall ansible (brew)
-  homebrew:
-    name: ansible
-    state: absent
-
-- name: Install ansible through pip
-  pip:
-    name: ansible
-    state: latest
 
 - name: Install trello
   shell: mas install 1278508951
@@ -53,3 +58,9 @@
 
 - name: Fix key repeat in hyper
   shell: defaults write co.zeit.hyper ApplePressAndHoldEnabled -bool false
+
+- name: Show status bar in Safari
+  shell: defaults write com.apple.Safari ShowStatusBar -boolean true
+
+- name: Show status bar in Finder
+  shell: defaults write com.apple.finder ShowStatusBar -bool true

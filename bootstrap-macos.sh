@@ -16,5 +16,5 @@ mkdir -p ~/repos/
 cd ~/repos
 git clone git@github.com:tranchis/dotfiles.git
 
-cd dotfiles/playbook
-ansible-playbook -i inventory macos.yml
+cd dotfiles
+ansible-playbook -i inventory macos.yml -K
