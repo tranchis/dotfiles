@@ -36,12 +36,12 @@
 
 - name: Tap versions
   homebrew_tap:
-    name: caskroom/versions
+    name: AdoptOpenJDK/openjdk
     state: present
 
-- name: Install casks with versions
+- name: Install Java 8
   homebrew_cask:
-    name: ['java8']
+    name: ['adoptopenjdk8']
     state: latest
 
 - name: Install pip
