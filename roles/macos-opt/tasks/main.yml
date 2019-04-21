@@ -1,11 +1,11 @@
 ---
 - name: Install opt apps
   homebrew:
-    name: ['minio/stable/mc']
+    name: ['minio/stable/mc', 'handbrake']
 
 - name: Install opt casks
   homebrew_cask:
-    name: ['gog-galaxy', 'grandperspective', 'vlc', 'htop', 'clion', 'pycharm']
+    name: ['gog-galaxy', 'grandperspective', 'vlc', 'htop', 'clion', 'pycharm', 'steam']
 
 - name: Install Keynote
   shell: mas install 409183694

@@ -6,7 +6,7 @@
 
 - name: Install packages
   homebrew:
-    name: ['inetutils', 'the_silver_searcher', 'zsh', 'zsh-completions', 'zsh-autosuggestions', 'tmux', 'mosh', 'wget', 'leiningen', 'mas', 'git-lfs']
+    name: ['gnu-tar', 'inetutils', 'the_silver_searcher', 'zsh', 'zsh-completions', 'zsh-autosuggestions', 'tmux', 'mosh', 'wget', 'leiningen', 'mas', 'git-lfs']
     state: latest
 
 - name: Add zsh to /etc/shells
