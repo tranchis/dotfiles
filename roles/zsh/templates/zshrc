@@ -113,3 +113,6 @@ export CPPFLAGS="-I/usr/local/opt/zlib/include -I/usr/local/opt/sqlite/include"
 export PKG_CONFIG_PATH="/usr/local/opt/zlib/lib/pkgconfig:/usr/local/opt/sqlite/lib/pkgconfig"
 
 alias clone="git clone $*"
+
+export LC_ALL=en_US.UTF-8
+export LANG=en_US.UTF-8
