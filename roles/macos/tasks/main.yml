@@ -31,7 +31,7 @@
 
 - name: Install casks
   homebrew_cask:
-    name: ['jumpcut', 'slack', 'dropbox', 'istat-menus', 'caffeine', 'java', 'discord', 'docker', 'hyper', 'font-fira-code', 'virtualbox', 'vagrant', 'firefox', 'emacs', 'papers', 'amethyst', 'battle-net', 'mactex']
+    name: ['viscosity', 'jumpcut', 'slack', 'dropbox', 'istat-menus', 'caffeine', 'java', 'discord', 'docker', 'hyper', 'font-fira-code', 'virtualbox', 'vagrant', 'firefox', 'emacs', 'papers', 'amethyst', 'battle-net', 'mactex']
     state: latest
 
 - name: Tap versions
