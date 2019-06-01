@@ -1,11 +1,16 @@
 ---
+- name: Tap dive
+  homebrew_tap:
+    name: wagoodman/dive
+    state: present
+
 - name: Install opt apps
   homebrew:
-    name: ['minio/stable/mc', 'handbrake']
+    name: ['minio/stable/mc', 'handbrake', 'dive', 'exiftool']
 
 - name: Install opt casks
   homebrew_cask:
-    name: ['gog-galaxy', 'grandperspective', 'vlc', 'htop', 'clion', 'pycharm', 'steam']
+    name: ['gog-galaxy', 'grandperspective', 'vlc', 'htop', 'clion', 'pycharm', 'steam', 'postman']
 
 - name: Install Keynote
   shell: mas install 409183694

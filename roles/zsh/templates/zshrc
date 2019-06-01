@@ -115,5 +115,16 @@ export PKG_CONFIG_PATH="/usr/local/opt/zlib/lib/pkgconfig:/usr/local/opt/sqlite/
 
 alias clone="git clone $*"
 
-export LC_ALL=en_US.UTF-8
-export LANG=en_US.UTF-8
+export LANG=
+export LC_COLLATE="C"
+export LC_CTYPE="UTF-8"
+export LC_MESSAGES="C"
+export LC_MONETARY="C"
+export LC_NUMERIC="C"
+export LC_TIME="C"
+export LC_ALL=
+
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+export PATH="$PATH:$HOME/.rvm/bin"
+
+POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(virtualenv context dir vcs)
