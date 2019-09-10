@@ -5,7 +5,8 @@ Set-ExecutionPolicy Bypass -Scope Process -Force; iex ((New-Object System.Net.We
 Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux
 
 choco upgrade --allow-empty-checksums -y battle.net
-choco upgrade -y firefox battle.net hyper vim steam git git-lfs firacode virtualbox itunes thunderbird goggalaxy slack virtualbox.extensionpack lastpass vcxsrv
+choco upgrade -y firefox thunderbird pycharm dropbox battle.net hyper vim steam git git-lfs firacode itunes goggalaxy slack vcxsrv nodejs.install visualstudio2017buildtools
+choco install -y python --version 3.7.2
 
 if(!(Test-Path ~/Ubuntu/ubuntu1804.exe)) {
   Invoke-WebRequest -Uri https://aka.ms/wsl-ubuntu-1804 -OutFile ~/Ubuntu.appx -UseBasicParsing
@@ -14,7 +15,15 @@ if(!(Test-Path ~/Ubuntu/ubuntu1804.exe)) {
   ~/Ubuntu/ubuntu1804.exe
 }
 
-Invoke-WebRequest -Uri https://raw.githubusercontent.com/tranchis/dotfiles/master/hyper.js -OutFile ~/.hyper.js -UseBasicParsing
+if(!(Test-Path ~/DockerDesktop.exe)) {
+  Invoke-WebRequest -Uri https://download.docker.com/win/stable/Docker%20for%20Windows%20Installer.exe -OutFile ~/DockerDesktop.exe -UseBasicParsing
+  ~/DockerDesktop.exe
+}
+
+if(!(Test-Path ~/tridactyl.xpi)) {
+  Invoke-WebRequest -Uri https://tridactyl.cmcaine.co.uk/betas/tridactyl-latest.xpi -OutFile ~/tridactyl.xpi -UseBasicParsing
+  Start-Process firefox ~/tridactyl.xpi
+}
 
 Read-Host 'Press Enter to continue…' | Out-Null
 

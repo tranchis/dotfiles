@@ -17,6 +17,11 @@
     - ranger
     - emacs26
     - x11-xkb-utils
+    - npm
+    - nodejs
+    - libffi-dev
+    - libreadline-dev
+    - libsqlite3-dev
 
 - name: Install python packages
   package:
@@ -288,3 +293,8 @@
   with_items:
     - "https://9to5mac.com/wp-content/uploads/sites/6/2018/06/mojave-night.jpg"
 
+- name: Connect to windows daemon
+  lineinfile:
+    path: ~/.zshrc
+    state: present
+    line: "export DOCKER_HOST=tcp://localhost:2375"
