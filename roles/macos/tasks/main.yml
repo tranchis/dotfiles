@@ -21,7 +21,7 @@
 
 - name: Tap fonts
   homebrew_tap:
-    name: caskroom/fonts
+    name: homebrew/cask-fonts
     state: present
 
 - name: Tap versions
@@ -31,8 +31,14 @@
 
 - name: Install casks
   homebrew_cask:
-    name: ['viscosity', 'jumpcut', 'slack', 'dropbox', 'istat-menus', 'caffeine', 'java', 'discord', 'docker', 'hyper', 'font-fira-code', 'virtualbox', 'vagrant', 'firefox', 'emacs', 'papers', 'amethyst', 'battle-net', 'mactex']
+    name: ['viscosity', 'jumpcut', 'slack', 'istat-menus', 'caffeine', 'java', 'discord', 'docker', 'hyper', 'font-fira-code', 'virtualbox', 'vagrant', 'firefox', 'emacs', 'papers', 'amethyst', 'battle-net', 'sensiblesidebuttons']
     state: latest
+
+- name: Install casks without quarantine
+  homebrew_cask:
+    name: ['dropbox']
+    state: latest
+    install_options: no_quarantine
 
 - name: Tap versions
   homebrew_tap:

@@ -1,7 +1,7 @@
 ---
 - name: Install caffe and python
   homebrew:
-    name: ['caffe', 'python', 'zlib', 'pyenv']
+    name: ['caffe', 'python', 'zlib', 'pyenv', 'xz']
     state: latest
 
 - name: Install zlib at os level
@@ -9,13 +9,18 @@
   command: installer -pkg /Library/Developer/CommandLineTools/Packages/macOS_SDK_headers_for_macOS_10.14.pkg -target /
   ignore_errors: yes
 
+- name: Install python 3.7.4
+  shell: SDKROOT=/Library/Developer/CommandLineTools/SDKs/MacOSX10.14.sdk/ pyenv install 3.7.4
+
 - name: Install virtualenv
   pip:
     name: virtualenv
     state: latest
+  become: yes
 
 - name: Install virtualenvwrapper
   pip:
     name: virtualenvwrapper
     state: latest
+  become: yes
 
