@@ -6,10 +6,10 @@
 
   roles:
     - macos
-    - macos-opt
-    - vim
-    - spacemacs
-    - zsh
+    - { role: macos-opt, tags: ['macos-opt'] }
+    - { role: vim, tags: ['vim'] }
+    - { role: spacemacs, tags: ['spacemacs'] }
+    - { role: zsh, tags: ['zsh'] }
     - { role: ml, tags: ['ml'] }
     - { role: tmux, tags: ['tmux'] }
     - { role: set-java-8, tags: ['java'] }
