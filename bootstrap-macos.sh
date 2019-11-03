@@ -10,7 +10,7 @@ softwareupdate -i "$PROD" --verbose;
 
 echo | /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
-brew install ansible
+pip3 install ansible
 
 mkdir -p ~/repos/
 cd ~/repos
