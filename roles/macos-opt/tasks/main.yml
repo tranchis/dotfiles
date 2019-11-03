@@ -10,7 +10,7 @@
 
 - name: Install opt casks
   homebrew_cask:
-    name: ['gog-galaxy', 'grandperspective', 'vlc', 'clion', 'pycharm', 'steam', 'postman']
+    name: ['intel-power-gadget', 'softraid', 'sensiblesidebuttons', 'gog-galaxy', 'grandperspective', 'vlc', 'clion', 'pycharm', 'steam', 'postman']
 
 - name: Install Keynote
   shell: mas install 409183694
@@ -23,6 +23,10 @@
 
 - name: Install Xcode
   shell: mas install 497799835
+
+- name: Link to xcode
+  shell: xcode-select -s /Applications/Xcode.app/Contents/Developer
+  become: yes
 
 - name: Accept xcodebuild license
   shell: xcodebuild -license accept

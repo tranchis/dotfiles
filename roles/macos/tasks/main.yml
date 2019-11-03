@@ -31,7 +31,7 @@
 
 - name: Install casks
   homebrew_cask:
-    name: ['viscosity', 'jumpcut', 'slack', 'istat-menus', 'caffeine', 'java', 'discord', 'docker', 'hyper', 'font-fira-code', 'virtualbox', 'vagrant', 'firefox', 'emacs', 'papers', 'amethyst', 'battle-net', 'sensiblesidebuttons']
+    name: ['displaycal', 'viscosity', 'jumpcut', 'slack', 'istat-menus', 'caffeine', 'java', 'discord', 'docker', 'hyper', 'font-fira-code', 'virtualbox', 'vagrant', 'firefox', 'emacs', 'papers', 'amethyst', 'battle-net', 'sensiblesidebuttons']
     state: latest
 
 - name: Install casks without quarantine
