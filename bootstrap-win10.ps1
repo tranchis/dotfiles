@@ -6,7 +6,7 @@ Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-L
 
 choco upgrade --allow-empty-checksums -y battle.net
 choco upgrade -y firefox thunderbird pycharm dropbox battle.net hyper vim steam git git-lfs firacode itunes goggalaxy slack vcxsrv nodejs.install visualstudio2017buildtools
-choco install -y python --version 3.7.2
+choco install -y anaconda3 --params /AddToPath
 
 if(!(Test-Path ~/Ubuntu/ubuntu1804.exe)) {
   Invoke-WebRequest -Uri https://aka.ms/wsl-ubuntu-1804 -OutFile ~/Ubuntu.appx -UseBasicParsing
