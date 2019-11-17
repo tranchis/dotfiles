@@ -9,11 +9,29 @@
   command: installer -pkg /Library/Developer/CommandLineTools/Packages/macOS_SDK_headers_for_macOS_10.14.pkg -target /
   ignore_errors: yes
 
+- name: Install system pip
+  shell: /usr/bin/easy_install pip
+  become: yes
+
+- name: Install virtualenv
+  pip:
+    name: virtualenv
+    state: latest
+  become: yes
+
+- name: Install virtualenvwrapper
+  pip:
+    name: virtualenvwrapper
+    state: latest
+  become: yes
+
 - name: Install python 3.7.4
   shell: SDKROOT=/Library/Developer/CommandLineTools/SDKs/MacOSX10.14.sdk/ pyenv install 3.7.4
   ignore_errors: yes
 
-- shell: brew reinstall python
+- name: Install python 3.7.4
+  shell: SDKROOT=/Library/Developer/CommandLineTools/SDKs/MacOSX10.14.sdk/ pyenv global 3.7.4
+  ignore_errors: yes
 
 - shell: pip3 install --upgrade pip
   become: yes
