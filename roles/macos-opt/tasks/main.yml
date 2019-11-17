@@ -10,7 +10,7 @@
 
 - name: Install opt casks
   homebrew_cask:
-    name: ['intel-power-gadget', 'softraid', 'sensiblesidebuttons', 'gog-galaxy', 'grandperspective', 'vlc', 'clion', 'pycharm', 'steam', 'postman']
+    name: ['balenaetcher', 'intel-power-gadget', 'softraid', 'sensiblesidebuttons', 'gog-galaxy', 'grandperspective', 'vlc', 'clion', 'pycharm', 'steam', 'postman']
 
 - name: Install Keynote
   shell: mas install 409183694
