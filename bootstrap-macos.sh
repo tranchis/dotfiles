@@ -11,10 +11,11 @@ softwareupdate -i "$PROD" --verbose;
 echo | /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
 pip3 install ansible
+brew install ansible
 
 mkdir -p ~/repos/
 cd ~/repos
-git clone git@github.com:tranchis/dotfiles.git
+git clone https://github.com/tranchis/dotfiles.git
 
 cd dotfiles
 ansible-playbook -i inventory macos.yml -K

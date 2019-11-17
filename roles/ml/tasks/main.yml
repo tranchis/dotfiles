@@ -15,17 +15,19 @@
 
 - shell: brew reinstall python
 
-- shell: pip install --upgrade pip
+- shell: pip3 install --upgrade pip
   become: yes
 
 - name: Install virtualenv
   pip:
+    executable: pip3
     name: virtualenv
     state: latest
   become: yes
 
 - name: Install virtualenvwrapper
   pip:
+    executable: pip3
     name: virtualenvwrapper
     state: latest
   become: yes

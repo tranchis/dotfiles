@@ -1,7 +1,7 @@
 ---
 - name: Download janus
   get_url:
-    url: https://bit.ly/janus-bootstrap
+    url: https://raw.githubusercontent.com/carlhuda/janus/master/bootstrap.sh
     dest: /tmp/janus-bootstrap.sh
     mode: 0755
 
