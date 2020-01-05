@@ -1,9 +1,9 @@
 ---
 - hosts: local
   roles:
+    - zsh
     - ubuntu
     - vim
-    - zsh
     - spacemacs
     - tmux
     - ubuntu-ml

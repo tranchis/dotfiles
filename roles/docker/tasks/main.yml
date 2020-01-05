@@ -30,7 +30,7 @@
   become: yes
 
 - name: Assign permissions to client
-  shell: usermod -aG docker "{{ remote_user }}"
+  shell: usermod -aG docker "`whoami`"
   become: yes
 
 - name: Connect to windows docker daemon

@@ -23,6 +23,7 @@
 
 - name: Install oh my zsh
   shell: bash /tmp/oh-my-zsh.sh
+  ignore_errors: True
 
 - name: Copy zshrc
   template:
