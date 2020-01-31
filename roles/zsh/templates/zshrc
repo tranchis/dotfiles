@@ -77,7 +77,6 @@ source $ZSH/oh-my-zsh.sh
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
-# export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
 # if [[ -n $SSH_CONNECTION ]]; then
@@ -117,7 +116,7 @@ export PKG_CONFIG_PATH="/usr/local/opt/zlib/lib/pkgconfig:/usr/local/opt/sqlite/
 
 alias clone="git clone $*"
 
-export LANG=
+export LANG=en_US.UTF-8
 export LC_COLLATE="C"
 export LC_CTYPE="UTF-8"
 export LC_MESSAGES="C"

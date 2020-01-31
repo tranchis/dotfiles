@@ -8,3 +8,4 @@
     - tmux
     - ubuntu-ml
     - docker
+    - fix-locale

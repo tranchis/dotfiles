@@ -10,6 +10,7 @@
     state: latest
   become: yes
   with_items:
+    - openjdk-8-jdk
     - rake
     - git
     - zsh
