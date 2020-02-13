@@ -1,0 +1,8 @@
+---
+- name: Install base packages
+  package:
+    name: "{{ item }}"
+    state: latest
+  become: yes
+  with_items:
+    - zsh

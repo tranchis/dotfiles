@@ -1,0 +1,12 @@
+---
+- hosts: local
+  roles:
+    - ubuntu1904
+    - zsh
+    - vim
+    - spacemacs
+    - tmux
+    - ubuntu-ml
+    - nvidia
+    - docker
+

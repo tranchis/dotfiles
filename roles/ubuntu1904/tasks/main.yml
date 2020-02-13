@@ -1,0 +1,54 @@
+---
+- name: Install repo
+  become: yes
+  apt_repository:
+    repo: ppa:kelleyk/emacs
+
+- name: Install base packages
+  package:
+    name: "{{ item }}"
+    state: latest
+  become: yes
+  with_items:
+    - rake
+    - git
+    - zsh
+    - vim
+    - ranger
+    - emacs26
+    - x11-xkb-utils
+    - node-gyp
+    - npm
+    - nodejs
+    - libffi-dev
+    - libreadline-dev
+    - libsqlite3-dev
+
+- name: Install python packages
+  package:
+    name: "{{ item }}"
+    state: latest
+  become: yes
+  with_items:
+    - python3-pip
+    - python-pip
+    - python-virtualenv
+    - virtualenvwrapper
+
+- name: Install python modules
+  pip:
+    name: "{{ item }}"
+    state: latest
+  become: yes
+  with_items:
+    - virtualenv
+    - virtualenvwrapper
+
+- name: Install apps
+  package:
+    name: "{{ item }}"
+    state: latest
+  become: yes
+  with_items:
+    - fonts-firacode
+    - thunderbird
