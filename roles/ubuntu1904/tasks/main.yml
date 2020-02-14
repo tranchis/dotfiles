@@ -23,6 +23,8 @@
     - libffi-dev
     - libreadline-dev
     - libsqlite3-dev
+    - exfat-fuse
+    - exfat-utils
 
 - name: Install python packages
   package:
