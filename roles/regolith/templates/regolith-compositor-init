@@ -1,0 +1,1 @@
+/usr/bin/compton -f --config /home/{{ ansible_user }}/.config/regolith/compton/config

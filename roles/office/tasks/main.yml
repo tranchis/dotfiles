@@ -1,0 +1,9 @@
+---
+- name: Install office packages
+  package:
+    name: "{{ item }}"
+    state: latest
+  become: yes
+  with_items:
+    - libreoffice-gtk
+    - libreoffice-writer

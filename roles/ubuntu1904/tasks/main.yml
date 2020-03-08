@@ -25,6 +25,8 @@
     - libsqlite3-dev
     - exfat-fuse
     - exfat-utils
+    - tmux
+    - htop
 
 - name: Install python packages
   package:

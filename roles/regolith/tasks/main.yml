@@ -1,0 +1,31 @@
+---
+- name: Create config folders
+  file:
+    path: "{{ item }}"
+    state: directory
+  with_items:
+    - "~/.config/regolith"
+    - "~/.config/regolith/i3"
+    - "~/.config/regolith/i3xrocks"
+    - "~/.config/regolith/compton"
+
+- name: Copy regolith-compositor script
+  template:
+    src: regolith-compositor-init
+    dest: ~/.config/regolith/regolith-compositor-init
+    mode: 0700
+
+- name: Copy i3 config
+  template:
+    src: i3
+    dest: ~/.config/regolith/i3/config
+
+- name: Copy i3xrocks config
+  template:
+    src: i3xrocks
+    dest: ~/.config/regolith/i3xrocks/config
+
+- name: Copy compton config
+  template:
+    src: compton
+    dest: ~/.config/regolith/compton/config
