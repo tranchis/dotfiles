@@ -117,12 +117,6 @@ export PKG_CONFIG_PATH="/usr/local/opt/zlib/lib/pkgconfig:/usr/local/opt/sqlite/
 alias clone="git clone $*"
 
 export LANG=en_US.UTF-8
-export LC_COLLATE="C"
-export LC_CTYPE="UTF-8"
-export LC_MESSAGES="C"
-export LC_MONETARY="C"
-export LC_NUMERIC="C"
-export LC_TIME="C"
 export LC_ALL=
 export EDITOR=vim
 

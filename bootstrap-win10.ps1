@@ -7,6 +7,8 @@ Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-L
 choco upgrade --allow-empty-checksums -y battle.net
 choco upgrade -y firefox thunderbird pycharm dropbox battle.net hyper vim steam git git-lfs firacode itunes goggalaxy slack vcxsrv nodejs.install visualstudio2017buildtools
 choco upgrade -y etcher autohotkey icloud virtualbox winrar virtualbox.extensionpack hwmonitor intelpowergadget adobereader cpu-z jdk8 rocketchat hwinfo intellijidea-ultimate
+choco upgrade -y vlc cmake openssl vscode libreoffice-fresh
+choco install -y mysql --version=5.7.18
 choco install -y anaconda3 --params /AddToPath
 
 if(!(Test-Path ~/Ubuntu/ubuntu1804.exe)) {
