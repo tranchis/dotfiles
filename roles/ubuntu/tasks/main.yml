@@ -103,6 +103,12 @@
     dest: ~/bin/bartermapp
     mode: 0755
 
+- name: Install random-string
+  template:
+    src: random-string
+    dest: ~/bin/random-string
+    mode: 0755
+
 - name: Create i3 config folder
   file:
     path: ~/.config/i3/
