@@ -24,10 +24,25 @@
     name: homebrew/cask-fonts
     state: present
 
+- name: Tap emacs-plus
+  homebrew_tap:
+    name: d12frosted/emacs-plus
+    state: present
+
 - name: Tap versions
   homebrew_tap:
     name: caskroom/versions
     state: absent
+
+- name: Install emacs-plus
+  homebrew:
+    name: ['emacs-plus']
+    state: latest
+
+- name: Link emacs-plus
+  homebrew:
+    name: ['emacs-plus']
+    state: linked
 
 - name: Install casks
   homebrew_cask:
