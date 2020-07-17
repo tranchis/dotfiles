@@ -1,0 +1,17 @@
+---
+- name: Install packages
+  apt:
+    pkg:
+      - software-properties-common
+  become: yes
+
+- name: Add PPA
+  apt_repository:
+    repo: 'ppa:rael-gc/rvm'
+  become: yes
+
+- name: Install ruby
+  apt:
+    pkg:
+      - rvm
+  become: yes
