@@ -65,3 +65,16 @@
     path: ~/.zshrc
     state: present
     line: "export DOCKER_HOST=tcp://localhost:2375"
+
+- name: Download doctl
+  get_url:
+    url: https://github.com/digitalocean/doctl/releases/download/v1.46.0/doctl-1.46.0-linux-amd64.tar.gz
+    dest: /tmp/doctl.tar.gz
+
+- name: Uncompress doctl
+  unarchive:
+    src: /tmp/doctl.tar.gz
+    dest: /usr/local/bin/
+    mode: 0755
+    remote_src: yes
+  become: yes
