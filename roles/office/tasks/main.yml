@@ -7,3 +7,5 @@
   with_items:
     - libreoffice-gtk
     - libreoffice-writer
+    - libreoffice-impress
+    - libreoffice-calc

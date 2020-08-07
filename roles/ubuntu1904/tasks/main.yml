@@ -27,6 +27,7 @@
     - exfat-utils
     - tmux
     - htop
+    - snap
 
 - name: Install python packages
   package:
@@ -56,3 +57,12 @@
   with_items:
     - fonts-firacode
     - thunderbird
+
+- name: Install ubuntu-make
+  snap:
+    name: "{{ item }}"
+    classic: yes
+  become: yes
+  with_items:
+    - ubuntu-make
+    - pycharm-professional
