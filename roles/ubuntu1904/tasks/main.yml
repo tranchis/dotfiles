@@ -36,8 +36,7 @@
   become: yes
   with_items:
     - python3-pip
-    - python-pip
-    - python-virtualenv
+    - python3-virtualenv
     - virtualenvwrapper
 
 - name: Install python modules
