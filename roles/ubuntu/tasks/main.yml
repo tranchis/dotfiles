@@ -22,6 +22,7 @@
     - libffi-dev
     - libreadline-dev
     - libsqlite3-dev
+    - apt-transport-https
     - gnupg2
 
 - name: Install python packages
@@ -49,6 +50,22 @@
 - name: Install kubectl
   package:
     name: kubectl
+  become: yes
+
+- name: Add helm apt key
+  apt_key:
+    url: https://helm.baltorepo.com/organization/signing.asc
+  become: yes
+
+- name: Add helm repository
+  apt_repository:
+    repo: deb https://baltocdn.com/helm/stable/debian/ all main
+    state: present
+  become: yes
+
+- name: Install helm
+  package:
+    name: helm
   become: yes
 
 - name: Install python modules
