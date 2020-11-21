@@ -5,15 +5,13 @@
     state: present
 
 - name: Install opt apps
-  homebrew:
-    name: ['minio/stable/mc', 'handbrake', 'dive', 'exiftool', 'htop', 'yarn', 'gnupg', 'postgresql']
+  shell: brew install minio/stable/mc handbrake dive exiftool htop yarn gnupg postgresql
 
 - name: Install rvm keys
-  shell: gpg --keyserver hkp://pool.sks-keyservers.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB
+  shell: gpg --keyserver hkp://ipv4.pool.sks-keyservers.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB
 
 - name: Install opt casks
-  homebrew_cask:
-    name: ['mactex-no-gui', 'balenaetcher', 'intel-power-gadget', 'softraid', 'sensiblesidebuttons', 'gog-galaxy', 'grandperspective', 'vlc', 'clion', 'pycharm', 'steam', 'postman']
+  shell: brew cask install mactex-no-gui balenaetcher softraid sensiblesidebuttons gog-galaxy grandperspective vlc clion pycharm steam postman
 
 - name: Install rvm
   shell: curl -sSL https://get.rvm.io | bash -s stable --ruby=jruby --gems=rails,puma

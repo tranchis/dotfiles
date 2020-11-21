@@ -5,9 +5,7 @@
   become: yes
 
 - name: Install packages
-  homebrew:
-    name: ['node', 'restic', 'gnu-tar', 'inetutils', 'the_silver_searcher', 'zsh', 'zsh-completions', 'zsh-autosuggestions', 'tmux', 'mosh', 'wget', 'leiningen', 'mas', 'git-lfs']
-    state: latest
+  shell: brew install node restic gnu-tar inetutils the_silver_searcher zsh zsh-completions zsh-autosuggestions tmux mosh wget leiningen mas git-lfs
 
 - name: Add zsh to /etc/shells
   become: yes
@@ -35,9 +33,7 @@
     state: absent
 
 - name: Install emacs-plus
-  homebrew:
-    name: ['emacs-plus']
-    state: latest
+  shell: brew install emacs-plus
 
 - name: Link emacs-plus
   homebrew:
@@ -45,15 +41,7 @@
     state: linked
 
 - name: Install casks
-  homebrew_cask:
-    name: ['displaycal', 'viscosity', 'jumpcut', 'slack', 'istat-menus', 'caffeine', 'java', 'discord', 'docker', 'hyper', 'font-fira-code', 'virtualbox', 'vagrant', 'firefox', 'emacs', 'papers', 'amethyst', 'battle-net', 'sensiblesidebuttons']
-    state: latest
-
-- name: Install casks without quarantine
-  homebrew_cask:
-    name: ['dropbox']
-    state: latest
-    install_options: no_quarantine
+  shell: brew cask install displaycal viscosity jumpcut slack istat-menus caffeine discord docker hyper font-fira-code vagrant firefox papers amethyst battle-net sensiblesidebuttons dropbox nextcloud
 
 - name: Tap versions
   homebrew_tap:
@@ -61,9 +49,7 @@
     state: present
 
 - name: Install Java 8
-  homebrew_cask:
-    name: ['adoptopenjdk8']
-    state: latest
+  shell: brew cask install adoptopenjdk/openjdk/adoptopenjdk8
 
 - name: Install pip
   shell: easy_install pip
@@ -71,6 +57,9 @@
 
 - name: Install trello
   shell: mas install 1278508951
+
+- name: Install rocketchat
+  shell: mas install 1086818840
 
 - name: Copy hyper.js config
   template:
