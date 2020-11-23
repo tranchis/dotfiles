@@ -1,0 +1,5 @@
+---
+- name: Install rocket.chat
+  community.general.snap:
+    name: rocketchat-desktop
+  become: yes

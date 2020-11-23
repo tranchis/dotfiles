@@ -1,0 +1,11 @@
+---
+- name: Install leiningen
+  apt:
+    name: leiningen
+  become: yes
+
+- name: Install Intellij IDEA
+  community.general.snap:
+    name: intellij-idea-ultimate
+    classic: yes
+  become: yes

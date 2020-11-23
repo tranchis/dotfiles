@@ -1,15 +1,4 @@
 ---
-- name: Install cuda repo deb
-  apt:
-    deb: https://developer.download.nvidia.cn/compute/cuda/repos/ubuntu1804/x86_64/cuda-repo-ubuntu1804_10.2.89-1_amd64.deb
-  become: yes
-
-- name: Add cuda apt repo
-  apt_key:
-    url: https://developer.download.nvidia.cn/compute/cuda/repos/ubuntu1804/x86_64/7fa2af80.pub
-    state: present
-  become: yes
-
 - name: Install nvidia-docker apt key
   apt_key:
     url: https://nvidia.github.io/nvidia-docker/gpgkey
@@ -18,7 +7,7 @@
 
 - name: Install nvidia-docker repo
   get_url:
-    url: https://nvidia.github.io/nvidia-docker/ubuntu18.04/nvidia-docker.list
+    url: https://nvidia.github.io/nvidia-docker/ubuntu20.04/nvidia-docker.list
     dest: /etc/apt/sources.list.d/nvidia-docker.list
   become: yes
 
@@ -26,8 +15,8 @@
   apt:
     update_cache: yes
     pkg:
-      - nvidia-driver-440
-      - cuda
+      - nvidia-driver-450
+      - nvidia-cuda-toolkit
       - nvidia-container-runtime
       - nvidia-container-toolkit
   register: nvidia_install
