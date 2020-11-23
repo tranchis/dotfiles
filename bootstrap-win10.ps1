@@ -7,20 +7,18 @@ Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-L
 choco upgrade --allow-empty-checksums -y battle.net
 choco upgrade -y firefox thunderbird pycharm dropbox battle.net hyper vim steam git git-lfs firacode-ttf itunes goggalaxy slack vcxsrv nodejs.install visualstudio2017buildtools
 choco upgrade -y etcher autohotkey icloud virtualbox winrar virtualbox.extensionpack hwmonitor intelpowergadget adobereader cpu-z jdk8 rocketchat hwinfo intellijidea-ultimate
-choco upgrade -y vlc cmake openssl vscode libreoffice-fresh postman discord octave pyenv-win vagrant
+choco upgrade -y vlc cmake openssl vscode libreoffice-fresh postman discord octave pyenv-win vagrant nextcloud-client lein
 choco install -y mysql --version=5.7.18
 choco install -y anaconda3 --params /AddToPath
 
-if(!(Test-Path ~/Ubuntu/ubuntu1804.exe)) {
-  Invoke-WebRequest -Uri https://aka.ms/wsl-ubuntu-1804 -OutFile ~/Ubuntu.appx -UseBasicParsing
+dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
+dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
+
+if(!(Test-Path ~/Ubuntu/ubuntu2004.appx)) {
+  Invoke-WebRequest -Uri https://aka.ms/wslubuntu2004 -OutFile ~/Ubuntu.appx -UseBasicParsing
   Rename-Item ~/Ubuntu.appx Ubuntu.zip
   Expand-Archive ~/Ubuntu.zip ~/Ubuntu
-  ~/Ubuntu/ubuntu1804.exe
-}
-
-if(!(Test-Path ~/DockerDesktop.exe)) {
-  Invoke-WebRequest -Uri https://download.docker.com/win/stable/Docker%20for%20Windows%20Installer.exe -OutFile ~/DockerDesktop.exe -UseBasicParsing
-  ~/DockerDesktop.exe
+  ~/Ubuntu/ubuntu2004.exe
 }
 
 if(!(Test-Path ~/tridactyl.xpi)) {

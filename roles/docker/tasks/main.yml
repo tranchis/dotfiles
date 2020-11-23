@@ -19,7 +19,7 @@
 
 - name: Add docker repo
   apt_repository:
-    repo: "deb [arch=amd64] https://download.docker.com/linux/ubuntu bionic stable"
+    repo: "deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable"
     state: present
   become: yes
 
@@ -32,8 +32,3 @@
 - name: Assign permissions to client
   shell: usermod -aG docker "`whoami`"
   become: yes
-
-- name: Connect to windows docker daemon
-  lineinfile:
-    line: "export DOCKER_HOST=tcp://localhost:2375"
-    path: ~/.zshrc
