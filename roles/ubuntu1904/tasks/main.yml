@@ -57,7 +57,7 @@
     - fonts-firacode
     - thunderbird
 
-- name: Install ubuntu-make
+- name: Install snap apps in classic mode
   snap:
     name: "{{ item }}"
     classic: yes
@@ -65,3 +65,13 @@
   with_items:
     - ubuntu-make
     - pycharm-professional
+    - rubymine
+
+- name: Install snap apps in standard mode
+  snap:
+    name: "{{ item }}"
+    classic: no
+  become: yes
+  with_items:
+    - rocketchat-desktop
+    - discord

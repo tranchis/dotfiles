@@ -1,0 +1,31 @@
+---
+- name: Add i386 to dpkg
+  shell: dpkg --add-architecture i386
+  become: yes
+
+- name: Install wine apt key
+  apt_key:
+    url: https://dl.winehq.org/wine-builds/winehq.key
+    state: present
+  become: yes
+
+- name: Install lutris repo
+  apt_repository:
+    repo: ppa:lutris-team/lutris
+    state: present
+  become: yes
+
+- name: Install lutris
+  apt:
+    update_cache: yes
+    pkg:
+      - lutris
+  become: yes
+
+- name: Install lutris repo
+  apt_repository:
+    repo: deb https://dl.winehq.org/wine-builds/ubuntu/ focal main
+    state: present
+  become: yes
+
+

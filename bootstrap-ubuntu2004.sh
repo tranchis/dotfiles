@@ -5,5 +5,5 @@ sudo apt-get upgrade -y
 sudo apt-get install ansible
 
 ansible-galaxy collection install community.general
-ansible-playbook -i inventory ubuntu1904.yml
+ansible-playbook -K -i inventory ubuntu-2004-amd.yml
 
