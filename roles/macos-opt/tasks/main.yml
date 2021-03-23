@@ -5,17 +5,23 @@
     state: present
 
 - name: Install opt apps
-  shell: brew install minio/stable/mc handbrake dive exiftool htop yarn gnupg postgresql doctl kubectl
+  shell: brew install dive exiftool htop yarn gnupg postgresql ranger
 
-- name: Install rvm keys
-  shell: gpg --keyserver hkp://ipv4.pool.sks-keyservers.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB
+- name: Install handbrake
+  shell: brew install --cask handbrake
+
+- name: Install minio
+  get_url:
+    url: https://dl.min.io/client/mc/release/darwin-amd64/mc
+    dest: /usr/local/bin/mc
+    mode: 0755
 
 - name: Install opt casks
-  shell: brew cask install mactex-no-gui balenaetcher softraid sensiblesidebuttons gog-galaxy grandperspective vlc clion pycharm steam postman
+  shell: brew install --cask mactex-no-gui balenaetcher softraid sensiblesidebuttons gog-galaxy grandperspective vlc steam postman visual-studio-code bettertouchtool clion pycharm intellij-idea
+  # shell: brew install --cask rubymine
 
-- name: Install rvm
-  shell: curl -sSL https://get.rvm.io | bash -s stable --ruby=jruby --gems=rails,puma
-  become: no
+- name: Install ruby 2.6.3
+  shell: optflags="-Wno-error=implicit-function-declaration" LDFLAGS="-L/opt/homebrew/opt/libffi/lib" CPPFLAGS="-I/opt/homebrew/opt/libffi/include" PKG_CONFIG_PATH="/opt/homebrew/opt/libffi/lib/pkgconfig" rbenv install 2.6.3
 
 - name: Install Keynote
   shell: mas install 409183694
@@ -28,6 +34,9 @@
 
 - name: Install Xcode
   shell: mas install 497799835
+
+- name: Install Whatsapp
+  shell: mas install 1147396723
 
 - name: Link to xcode
   shell: xcode-select -s /Applications/Xcode.app/Contents/Developer

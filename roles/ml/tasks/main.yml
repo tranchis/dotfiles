@@ -1,8 +1,6 @@
 ---
-- name: Install caffe and python
-  homebrew:
-    name: ['caffe', 'python', 'zlib', 'pyenv', 'xz']
-    state: latest
+- name: Install pyenv
+  shell: brew install python zlib pyenv xz && brew link pyenv
 
 - name: Install zlib at os level
   become: yes

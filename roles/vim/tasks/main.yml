@@ -1,4 +1,7 @@
 ---
+- gem:
+    name: rake
+
 - name: Download janus
   get_url:
     url: https://raw.githubusercontent.com/carlhuda/janus/master/bootstrap.sh

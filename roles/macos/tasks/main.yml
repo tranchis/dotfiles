@@ -5,7 +5,16 @@
   become: yes
 
 - name: Install packages
-  shell: brew install node restic gnu-tar inetutils the_silver_searcher zsh zsh-completions zsh-autosuggestions tmux mosh wget leiningen mas git-lfs
+  shell: brew install node restic gnu-tar inetutils the_silver_searcher zsh zsh-completions zsh-autosuggestions tmux mosh wget leiningen mas git-lfs rbenv bash go ruby rocket-chat
+
+# - name: Install packages from source
+#   shell: brew install --build-from-source vault
+
+# - name: Install kubectl
+#   shell: brew install --build-from-source kubectl && brew link --overwrite kubectl
+
+- name: Install doctl
+  shell: brew install doctl
 
 - name: Add zsh to /etc/shells
   become: yes
@@ -15,16 +24,11 @@
 
 - name: Change shell
   become_user: root
-  command: "chsh -s /usr/local/bin/zsh {{ lookup('env','USER') }}"
+  command: "chsh -s /bin/zsh {{ lookup('env','USER') }}"
 
 - name: Tap fonts
   homebrew_tap:
     name: homebrew/cask-fonts
-    state: present
-
-- name: Tap emacs-plus
-  homebrew_tap:
-    name: d12frosted/emacs-plus
     state: present
 
 - name: Tap versions
@@ -33,23 +37,23 @@
     state: absent
 
 - name: Install emacs-plus
-  shell: brew install emacs-plus
+  shell: brew tap d12frosted/emacs-plus && brew install emacs-plus
 
 - name: Link emacs-plus
-  homebrew:
-    name: ['emacs-plus']
-    state: linked
+  file:
+    src: /opt/homebrew/opt/emacs-plus@27/Emacs.app
+    dest: /Applications/Emacs.app
+    state: link
+
+- name: Install fira code
+  shell: brew tap homebrew/cask-fonts && brew install --cask font-fira-code
 
 - name: Install casks
-  shell: brew cask install displaycal viscosity jumpcut slack istat-menus caffeine discord docker hyper font-fira-code vagrant firefox papers amethyst battle-net sensiblesidebuttons dropbox nextcloud
-
-- name: Tap versions
-  homebrew_tap:
-    name: AdoptOpenJDK/openjdk
-    state: present
+  shell: brew install --cask displaycal viscosity jumpcut slack istat-menus caffeine discord hyper vagrant firefox papers amethyst battle-net sensiblesidebuttons dropbox nextcloud
+  # shell: brew install --cask docker
 
 - name: Install Java 8
-  shell: brew cask install adoptopenjdk/openjdk/adoptopenjdk8
+  shell: brew tap AdoptOpenJDK/openjdk && brew install --cask adoptopenjdk/openjdk/adoptopenjdk8
 
 - name: Install pip
   shell: easy_install pip
@@ -57,9 +61,6 @@
 
 - name: Install trello
   shell: mas install 1278508951
-
-- name: Install rocketchat
-  shell: mas install 1086818840
 
 - name: Copy hyper.js config
   template:

@@ -102,14 +102,13 @@ source $ZSH/oh-my-zsh.sh
 
 export DISPLAY=:0.0
 export PYENV_ROOT="$HOME/.pyenv"
-export PATH=~/bin/:$PYENV_ROOT/bin:/snap/bin/:$PATH
-export PATH="/usr/local/opt/gnu-tar/libexec/gnubin:$PATH"
+export PATH=~/bin/:$PYENV_ROOT/bin:/opt/homebrew/bin:/snap/bin/:$PATH
+export WORKON_HOME=~/Envs
 
 eval "$(pyenv init -)"
-
-export LDFLAGS="-L/usr/local/opt/zlib/lib -L/usr/local/opt/sqlite/lib"
-export CPPFLAGS="-I/usr/local/opt/zlib/include -I/usr/local/opt/sqlite/include"
-export PKG_CONFIG_PATH="/usr/local/opt/zlib/lib/pkgconfig:/usr/local/opt/sqlite/lib/pkgconfig"
+eval "$(rbenv init -)"
+unset JAVA_HOME
+export JAVA_HOME=`/usr/libexec/java_home -v11`
 
 alias clone="git clone $*"
 
@@ -117,10 +116,25 @@ export LANG=en_US.UTF-8
 export LC_ALL=
 export EDITOR=vim
 
-# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
-export PATH="$PATH:/usr/local/texlive/2019/bin/x86_64-darwin/:$HOME/.rvm/bin:/home/sergio/.local/bin"
+# Add rbenv to PATH for scripting. Make sure this is the last PATH variable change.
+export PATH="/opt/homebrew/bin:/usr/local/opt/bison/bin:/usr/local/opt/flex/bin:/usr/local/opt/mysql-client/bin:/usr/local/texlive/2019/bin/x86_64-darwin/:/home/sergio/.local/bin:/usr/local/sbin:/usr/local/bin:$PATH"
+
+export LDFLAGS="-L/usr/local/opt/mysql-client/lib -L/usr/local/opt/postgresql@10/lib -L/usr/local/opt/flex/lib -L/usr/local/opt/bison/lib -L/usr/local/opt/libffi/lib -L/usr/local/opt/openblas/lib"
+export CPPFLAGS="-I/usr/local/opt/mysql-client/include -I/usr/local/opt/postgresql@10/include -I/usr/local/opt/flex/include -I/usr/local/opt/libffi/include -I/usr/local/opt/openblas/include"
+export OPENBLAS="$(brew --prefix openblas)"
+
+export PKG_CONFIG_PATH="/usr/local/opt/mysql-client/lib/pkgconfig:/usr/local/opt/postgresql@10/lib/pkgconfig:/usr/local/opt/libffi/lib/pkgconfig"
+export PATH="/usr/local/opt/postgresql@10/bin:$PATH"
+
+export CFLAGS="${CFLAGS} -I$(brew --prefix openssl)/include -I$(brew --prefix bzip2)/include -I$(brew --prefix readline)/include -I$(xcrun --show-sdk-path)/usr/include" LDFLAGS="-L$(brew --prefix openssl)/lib -L$(brew --prefix readline)/lib -L$(brew --prefix zlib)/lib -L$(brew --prefix bzip2)/lib"
+export LDFLAGS="${LDFLAGS} -L$(xcrun --show-sdk-path)/usr/lib -L$(brew --prefix bzip2)/lib"
+export CFLAGS="${CFLAGS} -I$(xcrun --show-sdk-path)/usr/include -I$(brew --prefix bzip2)/include"
+
+# export SYSTEM_VERSION_COMPAT=1
 
 POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(virtualenv context dir vcs)
 
 autoload -U +X bashcompinit && bashcompinit
 complete -o nospace -C /usr/local/bin/mc mc
+
+export JAVA_HOME=`/usr/libexec/java_home -v 1.8`
