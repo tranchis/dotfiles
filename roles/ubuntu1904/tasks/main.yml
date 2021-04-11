@@ -2,7 +2,40 @@
 - name: Install repo
   become: yes
   apt_repository:
+    repo: ppa:papirus/papirus
+
+- name: Check if dropbox is installed
+  command: dpkg-query -W dropbox
+  register: my_package_check_deb
+  failed_when: my_package_check_deb.rc > 1
+  changed_when: my_package_check_deb.rc == 1
+
+- name: Download dropbox
+  get_url:
+    url: https://www.dropbox.com/download?dl=packages/ubuntu/dropbox_2020.03.04_amd64.deb
+    dest: /tmp/
+  when: my_package_check_deb.rc == 1
+
+- name: Install dropbox
+  apt: deb="/tmp/dropbox_2020.03.04_amd64.deb"
+  become: yes
+  when: my_package_check_deb.rc == 1
+
+- name: Install repo
+  become: yes
+  apt_repository:
     repo: ppa:kelleyk/emacs
+
+- name: Install ungoogled chromium repo key
+  become: yes
+  apt_key:
+    url: https://download.opensuse.org/repositories/home:ungoogled_chromium/Ubuntu_Focal/Release.key
+
+- name: Install ungoogled chromium repo
+  become: yes
+  apt_repository:
+    repo: "deb http://download.opensuse.org/repositories/home:/ungoogled_chromium/Ubuntu_Focal/ /"
+    update_cache: yes
 
 - name: Install base packages
   package:
@@ -28,6 +61,10 @@
     - tmux
     - htop
     - snap
+    - ungoogled-chromium
+    - latte-dock
+    - qt5-style-kvantum
+    - qt5-style-kvantum-themes
 
 - name: Install python packages
   package:

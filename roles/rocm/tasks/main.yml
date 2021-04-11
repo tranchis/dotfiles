@@ -16,12 +16,16 @@
     update_cache: yes
     pkg:
       - rocm-dkms
-      - rocm-dev
-      - mesa-common-dev
-      - clang
-      - comgr
       - rccl
-      - cmake
+      - rocblas
+      - miopen-hip
+      - hipfft
+      - rocblas
+      - rocrand
+      - llvm-amdgpu-pro-rocm
+      - llvm-amdgpu-pro-rocm-dev
+      - rocm-device-libs
+      - rocm-clang-ocl
   become: yes
 
 - name: Add user to groups
@@ -35,7 +39,8 @@
   git:
     repo: https://github.com/RadeonOpenCompute/llvm-project.git
     dest: ~/repos/llvm-project
-    version: roc-4.0.x
+    version: roc-4.1.x
+    force: yes
 
 - name: Create build project
   file:
@@ -54,7 +59,7 @@
       NUM_THREADS: 4
 
 - name: Install llvm
-  community.general.make:
-    chdir: ~/repos/llvm-project/build
-    target: install
+  shell: make install
+  args:
+    chdir: "/home/{{ ansible_user }}/repos/llvm-project/build"
   become: yes
