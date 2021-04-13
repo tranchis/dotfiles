@@ -1,8 +1,21 @@
 ---
-- name: Install repo
+- name: Install repo keys
+  become: yes
+  apt_key:
+    url: "{{ item }}"
+  with_items:
+    - https://packages.cloud.google.com/apt/doc/apt-key.gpg
+    - https://download.opensuse.org/repositories/home:ungoogled_chromium/Ubuntu_Focal/Release.key
+
+- name: Install repos
   become: yes
   apt_repository:
-    repo: ppa:papirus/papirus
+    repo: "{{ item }}"
+  with_items:
+    - "deb https://apt.kubernetes.io/ kubernetes-xenial main"
+    - ppa:papirus/papirus
+    - ppa:kelleyk/emacs
+    - "deb http://download.opensuse.org/repositories/home:/ungoogled_chromium/Ubuntu_Focal/ /"
 
 - name: Check if dropbox is installed
   command: dpkg-query -W dropbox
@@ -20,22 +33,6 @@
   apt: deb="/tmp/dropbox_2020.03.04_amd64.deb"
   become: yes
   when: my_package_check_deb.rc == 1
-
-- name: Install repo
-  become: yes
-  apt_repository:
-    repo: ppa:kelleyk/emacs
-
-- name: Install ungoogled chromium repo key
-  become: yes
-  apt_key:
-    url: https://download.opensuse.org/repositories/home:ungoogled_chromium/Ubuntu_Focal/Release.key
-
-- name: Install ungoogled chromium repo
-  become: yes
-  apt_repository:
-    repo: "deb http://download.opensuse.org/repositories/home:/ungoogled_chromium/Ubuntu_Focal/ /"
-    update_cache: yes
 
 - name: Install base packages
   package:
@@ -65,6 +62,11 @@
     - latte-dock
     - qt5-style-kvantum
     - qt5-style-kvantum-themes
+    - korganizer
+    - appmenu-gtk2-module
+    - appmenu-gtk3-module
+    - kdepim
+    - kubectl
 
 - name: Install python packages
   package:
@@ -112,3 +114,8 @@
   with_items:
     - rocketchat-desktop
     - discord
+    - doctl
+
+- name: Grant doctl permissions
+  shell: snap connect doctl:kube-config
+  become: yes
