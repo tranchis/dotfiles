@@ -22,8 +22,6 @@
       - hipfft
       - rocblas
       - rocrand
-      - llvm-amdgpu-pro-rocm
-      - llvm-amdgpu-pro-rocm-dev
       - rocm-device-libs
       - rocm-clang-ocl
   become: yes

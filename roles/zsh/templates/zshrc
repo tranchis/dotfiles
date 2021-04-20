@@ -100,6 +100,13 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
+if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+  test -d ~/.linuxbrew && eval $(~/.linuxbrew/bin/brew shellenv)
+  test -d /home/linuxbrew/.linuxbrew && eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
+  test -r ~/.bash_profile && echo "eval \$($(brew --prefix)/bin/brew shellenv)" >>~/.bash_profile
+  echo "eval \$($(brew --prefix)/bin/brew shellenv)" >>~/.profile
+fi
+
 export DISPLAY=:0.0
 export PYENV_ROOT="$HOME/.pyenv"
 export PATH=~/bin/:$PYENV_ROOT/bin:/opt/homebrew/bin:/snap/bin/:$PATH
@@ -108,12 +115,15 @@ export WORKON_HOME=~/Envs
 eval "$(pyenv init -)"
 eval "$(rbenv init -)"
 unset JAVA_HOME
-export JAVA_HOME=`/usr/libexec/java_home -v11`
+
+if [[ "$OSTYPE" == "darwin"* ]]; then
+  export JAVA_HOME=`/usr/libexec/java_home -v1.8`
+fi
 
 alias clone="git clone $*"
 
 export LANG=en_US.UTF-8
-export LC_ALL=
+export LC_ALL=en_US.UTF-8
 export EDITOR=vim
 
 # Add rbenv to PATH for scripting. Make sure this is the last PATH variable change.
@@ -126,9 +136,11 @@ export OPENBLAS="$(brew --prefix openblas)"
 export PKG_CONFIG_PATH="/usr/local/opt/mysql-client/lib/pkgconfig:/usr/local/opt/postgresql@10/lib/pkgconfig:/usr/local/opt/libffi/lib/pkgconfig"
 export PATH="/usr/local/opt/postgresql@10/bin:$PATH"
 
-export CFLAGS="${CFLAGS} -I$(brew --prefix openssl)/include -I$(brew --prefix bzip2)/include -I$(brew --prefix readline)/include -I$(xcrun --show-sdk-path)/usr/include" LDFLAGS="-L$(brew --prefix openssl)/lib -L$(brew --prefix readline)/lib -L$(brew --prefix zlib)/lib -L$(brew --prefix bzip2)/lib"
-export LDFLAGS="${LDFLAGS} -L$(xcrun --show-sdk-path)/usr/lib -L$(brew --prefix bzip2)/lib"
-export CFLAGS="${CFLAGS} -I$(xcrun --show-sdk-path)/usr/include -I$(brew --prefix bzip2)/include"
+if [[ "$OSTYPE" == "darwin"* ]]; then
+  export CFLAGS="${CFLAGS} -I$(brew --prefix openssl)/include -I$(brew --prefix bzip2)/include -I$(brew --prefix readline)/include -I$(xcrun --show-sdk-path)/usr/include" LDFLAGS="-L$(brew --prefix openssl)/lib -L$(brew --prefix readline)/lib -L$(brew --prefix zlib)/lib -L$(brew --prefix bzip2)/lib"
+  export LDFLAGS="${LDFLAGS} -L$(xcrun --show-sdk-path)/usr/lib -L$(brew --prefix bzip2)/lib"
+  export CFLAGS="${CFLAGS} -I$(xcrun --show-sdk-path)/usr/include -I$(brew --prefix bzip2)/include"
+fi
 
 # export SYSTEM_VERSION_COMPAT=1
 
@@ -137,4 +149,3 @@ POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(virtualenv context dir vcs)
 autoload -U +X bashcompinit && bashcompinit
 complete -o nospace -C /usr/local/bin/mc mc
 
-export JAVA_HOME=`/usr/libexec/java_home -v 1.8`
