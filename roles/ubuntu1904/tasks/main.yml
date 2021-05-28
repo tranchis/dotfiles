@@ -80,7 +80,9 @@
     - libreadline-dev
     - libsqlite3-dev
     - liblzma-dev
-    - rbenv
+
+- name: Install rbenv
+  shell: brew install rbenv
 
 - name: Install python packages
   package:
