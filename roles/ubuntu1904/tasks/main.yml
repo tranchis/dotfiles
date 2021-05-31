@@ -1,22 +1,4 @@
 ---
-- name: Install repo keys
-  become: yes
-  apt_key:
-    url: "{{ item }}"
-  with_items:
-    - https://packages.cloud.google.com/apt/doc/apt-key.gpg
-    - https://download.opensuse.org/repositories/home:ungoogled_chromium/Ubuntu_Focal/Release.key
-
-- name: Install repos
-  become: yes
-  apt_repository:
-    repo: "{{ item }}"
-  with_items:
-    - "deb https://apt.kubernetes.io/ kubernetes-xenial main"
-    - ppa:papirus/papirus
-    - ppa:kelleyk/emacs
-    - "deb http://download.opensuse.org/repositories/home:/ungoogled_chromium/Ubuntu_Focal/ /"
-
 - name: Check if dropbox is installed
   command: dpkg-query -W dropbox
   register: my_package_check_deb
@@ -45,9 +27,10 @@
     - zsh
     - vim
     - ranger
-    - emacs26
+    - emacs
     - x11-xkb-utils
     - node-gyp
+    - python3-gpg
     - npm
     - nodejs
     - libffi-dev
@@ -58,7 +41,6 @@
     - tmux
     - htop
     - snap
-    - ungoogled-chromium
     - latte-dock
     - qt5-style-kvantum
     - qt5-style-kvantum-themes
@@ -135,3 +117,6 @@
 - name: Grant doctl permissions
   shell: snap connect doctl:kube-config
   become: yes
+
+- name: Set caps as esc
+  shell: gsettings set org.gnome.desktop.input-sources xkb-options "['caps:escape']"

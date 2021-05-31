@@ -1,0 +1,18 @@
+---
+- name: Install repo keys
+  become: yes
+  apt_key:
+    url: "{{ item }}"
+  with_items:
+    - https://packages.cloud.google.com/apt/doc/apt-key.gpg
+    - https://download.opensuse.org/repositories/home:ungoogled_chromium/Ubuntu_Focal/Release.key
+
+- name: Install repos
+  become: yes
+  apt_repository:
+    repo: "{{ item }}"
+  with_items:
+    - "deb https://apt.kubernetes.io/ kubernetes-xenial main"
+    - ppa:papirus/papirus
+    - "deb http://download.opensuse.org/repositories/home:/ungoogled_chromium/Ubuntu_Focal/ /"
+
