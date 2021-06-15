@@ -15,7 +15,7 @@
   apt:
     update_cache: yes
     pkg:
-      - rocm-dkms
+      # - rocm-dkms
       - rccl
       - rocblas
       - miopen-hip
@@ -24,6 +24,10 @@
       - rocrand
       - rocm-device-libs
       - rocm-clang-ocl
+      - rocm-utils
+      - rocminfo
+      - rocm-libs
+      - amdgpu-pro-rocr-opencl
   become: yes
 
 - name: Add user to groups
@@ -54,10 +58,10 @@
   community.general.make:
     chdir: ~/repos/llvm-project/build
     params:
-      NUM_THREADS: 4
+      NUM_THREADS: 20
 
 - name: Install llvm
   shell: make install
   args:
-    chdir: "/home/{{ ansible_user }}/repos/llvm-project/build"
+    chdir: "/home/{{ lookup('env', 'USER') }}/repos/llvm-project/build"
   become: yes
