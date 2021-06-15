@@ -1,3 +1,7 @@
+export LANG=en_US.UTF-8
+export LC_CTYPE=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
+
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 export TERM="xterm-256color"
@@ -115,6 +119,7 @@ export WORKON_HOME=~/Envs
 export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init --path)"
+eval "$(pyenv init -)"
 eval "$(rbenv init -)"
 unset JAVA_HOME
 
@@ -124,8 +129,6 @@ fi
 
 alias clone="git clone $*"
 
-export LANG=en_US.UTF-8
-export LC_ALL=en_US.UTF-8
 export EDITOR=vim
 
 # Add rbenv to PATH for scripting. Make sure this is the last PATH variable change.
