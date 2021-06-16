@@ -3,7 +3,7 @@ export LC_CTYPE=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 
 # If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
+# export PATH=$HOME/bin:$(brew --prefix)/bin:$PATH
 export TERM="xterm-256color"
 
 # Path to your oh-my-zsh installation.
@@ -78,7 +78,7 @@ source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
-# export MANPATH="/usr/local/man:$MANPATH"
+# export MANPATH="$(brew --prefix)/man:$MANPATH"
 
 # You may need to manually set your language environment
 
@@ -132,14 +132,14 @@ alias clone="git clone $*"
 export EDITOR=vim
 
 # Add rbenv to PATH for scripting. Make sure this is the last PATH variable change.
-export PATH="/opt/homebrew/bin:/usr/local/opt/bison/bin:/usr/local/opt/flex/bin:/usr/local/opt/mysql-client/bin:/usr/local/texlive/2019/bin/x86_64-darwin/:/home/sergio/.local/bin:/usr/local/sbin:/usr/local/bin:$PATH"
+export PATH="/opt/homebrew/bin:$(brew --prefix)/opt/bison/bin:$(brew --prefix)/opt/flex/bin:$(brew --prefix)/opt/mysql-client/bin:$(brew --prefix)/texlive/2019/bin/x86_64-darwin/:/home/sergio/.local/bin:$(brew --prefix)/sbin:$(brew --prefix)/bin:$PATH"
 
-export LDFLAGS="-L/usr/local/opt/mysql-client/lib -L/usr/local/opt/postgresql@10/lib -L/usr/local/opt/flex/lib -L/usr/local/opt/bison/lib -L/usr/local/opt/libffi/lib -L/usr/local/opt/openblas/lib"
-export CPPFLAGS="-I/usr/local/opt/mysql-client/include -I/usr/local/opt/postgresql@10/include -I/usr/local/opt/flex/include -I/usr/local/opt/libffi/include -I/usr/local/opt/openblas/include"
+export LDFLAGS="-L$(brew --prefix)/opt/mysql-client/lib -L$(brew --prefix)/opt/postgresql@10/lib -L$(brew --prefix)/opt/flex/lib -L$(brew --prefix)/opt/bison/lib -L$(brew --prefix)/opt/libffi/lib -L$(brew --prefix)/opt/openblas/lib"
+export CPPFLAGS="-I$(brew --prefix)/opt/mysql-client/include -I$(brew --prefix)/opt/postgresql@10/include -I$(brew --prefix)/opt/flex/include -I$(brew --prefix)/opt/libffi/include -I$(brew --prefix)/opt/openblas/include"
 export OPENBLAS="$(brew --prefix openblas)"
 
-export PKG_CONFIG_PATH="/usr/local/opt/mysql-client/lib/pkgconfig:/usr/local/opt/postgresql@10/lib/pkgconfig:/usr/local/opt/libffi/lib/pkgconfig"
-export PATH="/usr/local/opt/postgresql@10/bin:$PATH"
+export PKG_CONFIG_PATH="$(brew --prefix)/opt/mysql-client/lib/pkgconfig:$(brew --prefix)/opt/postgresql@10/lib/pkgconfig:$(brew --prefix)/opt/libffi/lib/pkgconfig"
+export PATH="$(brew --prefix)/opt/postgresql@10/bin:$PATH"
 
 if [[ "$OSTYPE" == "darwin"* ]]; then
   export CFLAGS="${CFLAGS} -I$(brew --prefix openssl)/include -I$(brew --prefix bzip2)/include -I$(brew --prefix readline)/include -I$(xcrun --show-sdk-path)/usr/include" LDFLAGS="-L$(brew --prefix openssl)/lib -L$(brew --prefix readline)/lib -L$(brew --prefix zlib)/lib -L$(brew --prefix bzip2)/lib"
@@ -152,5 +152,5 @@ fi
 POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(virtualenv context dir vcs)
 
 autoload -U +X bashcompinit && bashcompinit
-complete -o nospace -C /usr/local/bin/mc mc
+complete -o nospace -C $(brew --prefix)/bin/mc mc
 
