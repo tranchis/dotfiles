@@ -47,7 +47,11 @@
   # shell: brew install --cask docker
 
 - name: Install Java 8
-  shell: brew tap AdoptOpenJDK/openjdk && brew install --cask adoptopenjdk/openjdk/adoptopenjdk8
+  shell: brew install openjdk@8
+
+- name: Link Java 8
+  shell: ln -sfn /usr/local/opt/openjdk@8/libexec/openjdk.jdk /Library/Java/JavaVirtualMachines/openjdk-8.jdk
+  become: yes
 
 - name: Install pip
   shell: easy_install pip
