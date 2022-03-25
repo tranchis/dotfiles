@@ -37,13 +37,7 @@
     state: absent
 
 - name: Install emacs-plus
-  shell: brew tap d12frosted/emacs-plus && brew install emacs-plus
-
-- name: Link emacs-plus
-  file:
-    src: /opt/homebrew/opt/emacs-plus@27/Emacs.app
-    dest: /Applications/Emacs.app
-    state: link
+  shell: brew tap d12frosted/emacs-plus && brew install emacs-plus && brew link emacs-plus
 
 - name: Install fira code
   shell: brew tap homebrew/cask-fonts && brew install --cask font-fira-code
