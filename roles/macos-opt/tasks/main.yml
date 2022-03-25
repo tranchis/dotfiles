@@ -39,6 +39,12 @@
 - name: Install Whatsapp
   shell: mas install 1147396723
 
+- name: Install pocket extension
+  shell: mas install 1477385213
+
+- name: Install vimium
+  shell: mas install 1480933944
+
 - name: Link to xcode
   shell: xcode-select -s /Applications/Xcode.app/Contents/Developer
   become: yes
