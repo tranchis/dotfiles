@@ -5,7 +5,7 @@
   become: yes
 
 - name: Install packages
-  shell: brew install node restic gnu-tar inetutils the_silver_searcher zsh zsh-completions zsh-autosuggestions tmux mosh wget leiningen mas git-lfs rbenv bash go ruby rocket-chat openjdk
+  shell: brew install node restic gnu-tar inetutils the_silver_searcher zsh zsh-completions zsh-autosuggestions tmux mosh wget leiningen mas git-lfs rbenv bash go ruby openjdk
 
 # - name: Install packages from source
 #   shell: brew install --build-from-source vault
@@ -61,6 +61,9 @@
 
 - name: Install trello
   shell: mas install 1278508951
+
+  - name: Install rocket-chat
+  shell: mas install 1086818840
 
 - name: Copy hyper.js config
   template:
