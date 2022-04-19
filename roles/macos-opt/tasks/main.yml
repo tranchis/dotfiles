@@ -55,3 +55,9 @@
 
 - name: Install RDP Client
   shell: mas install 1295203466
+
+- name: Install Intellij IDEA
+  community.general.snap:
+    name: intellij-idea-ultimate
+    classic: yes
+  become: yes

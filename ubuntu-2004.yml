@@ -1,0 +1,15 @@
+---
+- hosts: local
+  roles:
+    - repos-ubuntu2004
+    - ubuntu2004
+    - zsh
+    - vim
+    - spacemacs
+    - tmux
+    - docker
+    - { role: ubuntu2004-ml, tags: ['ml'] }
+    - { role: clojure, tags: ['clojure'] }
+
+# Needs: ansible-galaxy collection install community.general
+

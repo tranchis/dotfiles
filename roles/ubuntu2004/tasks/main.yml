@@ -40,7 +40,6 @@
     - exfat-utils
     - tmux
     - htop
-    - snap
     - latte-dock
     - qt5-style-kvantum
     - qt5-style-kvantum-themes
@@ -92,30 +91,6 @@
   with_items:
     - fonts-firacode
     - thunderbird
-
-- name: Install snap apps in classic mode
-  snap:
-    name: "{{ item }}"
-    classic: yes
-  become: yes
-  with_items:
-    - ubuntu-make
-    - pycharm-professional
-    - rubymine
-
-- name: Install snap apps in standard mode
-  snap:
-    name: "{{ item }}"
-    classic: no
-  become: yes
-  with_items:
-    - rocketchat-desktop
-    - discord
-    - doctl
-
-- name: Grant doctl permissions
-  shell: snap connect doctl:kube-config
-  become: yes
 
 - name: Set caps as esc
   shell: gsettings set org.gnome.desktop.input-sources xkb-options "['caps:escape']"
