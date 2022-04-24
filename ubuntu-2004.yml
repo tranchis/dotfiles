@@ -8,7 +8,7 @@
     - spacemacs
     - tmux
     - docker
-    - { role: ubuntu2004-ml, tags: ['ml'] }
+    - { role: ubuntu-ml, tags: ['ml'] }
     - { role: clojure, tags: ['clojure'] }
 
 # Needs: ansible-galaxy collection install community.general
