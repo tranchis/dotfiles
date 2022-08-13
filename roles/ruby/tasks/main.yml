@@ -15,3 +15,6 @@
     pkg:
       - rvm
   become: yes
+
+- name: Install rbenv
+  shell: brew install rbenv
