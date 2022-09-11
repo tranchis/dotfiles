@@ -29,6 +29,7 @@
     - ranger
     - emacs
     - x11-xkb-utils
+    - xvfb
     - node-gyp
     - python3-gpg
     - npm
@@ -59,6 +60,13 @@
     - libreadline-dev
     - libsqlite3-dev
     - liblzma-dev
+
+- name: Install packages from Internet
+  package:
+    deb: "{{ item }}"
+  become: yes
+  with_items:
+    - https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-x64
 
 - name: Install rbenv
   shell: /home/linuxbrew/.linuxbrew/bin/brew install rbenv
@@ -102,6 +110,7 @@
     name: "{{ item }}"
   with_items:
     - pycharm-professional
+    - com.jetbrains.IntelliJ-IDEA-Ultimate
     - rubymine
     - chat.rocket.RocketChat
     - com.discordapp.Discord
@@ -141,10 +150,18 @@
   become: yes
   register: idle_time
 
-- name: Set lid with external power
+- name: Set lid with external power (deprecated)
   ansible.builtin.lineinfile:
     path: /etc/systemd/logind.conf
     line: HandleLidSwitchExternalPower=suspend-then-hibernate
+    state: absent
+  become: yes
+  register: lid_external_power_deprecated
+
+- name: Set lid with external power
+  ansible.builtin.lineinfile:
+    path: /etc/systemd/logind.conf
+    line: HandleLidSwitchExternalPower=hibernate
   become: yes
   register: lid_external_power
 
@@ -165,5 +182,15 @@
 
 - name: Update initramfs if needed
   shell: update-initramfs -c -k all
-  when: sleep_conf.changed or idle_action.changed or idle_time.changed or lid_external_power.changed or lid_battery.changed or lid_battery_deprecated.changed
+  when: sleep_conf.changed or idle_action.changed or idle_time.changed or lid_external_power.changed or lid_external_power_deprecated.changed or lid_battery.changed or lid_battery_deprecated.changed
   become: yes
+
+- name: Download tridactyl
+  get_url:
+    url: https://tridactyl.cmcaine.co.uk/betas/tridactyl-latest.xpi
+    dest: /tmp/tridactyl-latest.xpi
+  register: tridactyl
+
+- name: Install tridactyl
+  shell: DISPLAY=:1.0 xdg-open /tmp/tridactyl-latest.xpi
+  when: tridactyl.changed
