@@ -11,8 +11,8 @@
 - name: Install spf
   shell: bash /tmp/sv-bootstrap.sh
 
-- name: Install vimrc.after
+- name: Set init config
   template:
-    src: vimrc.after
-    dest: ~/.vimrc.after
+    src: init.toml
+    dest: ~/.SpaceVim.d/init.toml
 
