@@ -2,14 +2,14 @@
 - gem:
     name: rake
 
-- name: Download janus
+- name: Download spf
   get_url:
-    url: https://raw.githubusercontent.com/carlhuda/janus/master/bootstrap.sh
-    dest: /tmp/janus-bootstrap.sh
+    url: https://spacevim.org/install.sh
+    dest: /tmp/sv-bootstrap.sh
     mode: 0755
 
-- name: Install janus
-  shell: bash /tmp/janus-bootstrap.sh
+- name: Install spf
+  shell: bash /tmp/sv-bootstrap.sh
 
 - name: Install vimrc.after
   template:

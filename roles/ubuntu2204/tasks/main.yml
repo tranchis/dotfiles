@@ -1,0 +1,169 @@
+---
+- name: Check if dropbox is installed
+  command: dpkg-query -W dropbox
+  register: my_package_check_deb
+  failed_when: my_package_check_deb.rc > 1
+  changed_when: my_package_check_deb.rc == 1
+
+- name: Download dropbox
+  get_url:
+    url: https://www.dropbox.com/download?dl=packages/ubuntu/dropbox_2020.03.04_amd64.deb
+    dest: /tmp/
+  when: my_package_check_deb.rc == 1
+
+- name: Install dropbox
+  apt: deb="/tmp/dropbox_2020.03.04_amd64.deb"
+  become: yes
+  when: my_package_check_deb.rc == 1
+
+- name: Install base packages
+  package:
+    name: "{{ item }}"
+    state: latest
+  become: yes
+  with_items:
+    - rake
+    - git
+    - zsh
+    - vim
+    - ranger
+    - emacs
+    - x11-xkb-utils
+    - node-gyp
+    - python3-gpg
+    - npm
+    - nodejs
+    - libffi-dev
+    - libreadline-dev
+    - libsqlite3-dev
+    - exfat-fuse
+    - exfatprogs
+    - tmux
+    - htop
+    - latte-dock
+    - qt5-style-kvantum
+    - qt5-style-kvantum-themes
+    - korganizer
+    - appmenu-gtk2-module
+    - appmenu-gtk3-module
+    - kdepim
+    - kubectl
+    - cmake
+    - gnome-calendar
+    - openssh-server
+    - build-essential
+    - zlib1g-dev
+    - libffi-dev
+    - libssl-dev
+    - libbz2-dev
+    - libreadline-dev
+    - libsqlite3-dev
+    - liblzma-dev
+
+- name: Install rbenv
+  shell: /home/linuxbrew/.linuxbrew/bin/brew install rbenv
+
+- name: Install pyenv
+  shell: /home/linuxbrew/.linuxbrew/bin/brew install pyenv
+
+- name: Install python packages
+  package:
+    name: "{{ item }}"
+    state: latest
+  become: yes
+  with_items:
+    - python3-pip
+    - python3-virtualenv
+    - virtualenvwrapper
+
+- name: Install python modules
+  pip:
+    name: "{{ item }}"
+    state: latest
+  become: yes
+  with_items:
+    - virtualenv
+    - virtualenvwrapper
+
+- name: Install apps
+  package:
+    name: "{{ item }}"
+    state: latest
+  become: yes
+  with_items:
+    - fonts-firacode
+    - thunderbird
+
+- name: Add flathub repo
+  shell: flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+
+- name: Install snap apps in classic mode
+  community.general.flatpak:
+    name: "{{ item }}"
+  with_items:
+    - pycharm-professional
+    - rubymine
+    - chat.rocket.RocketChat
+    - com.discordapp.Discord
+    - com.valvesoftware.Steam
+
+- name: Scale Steam UI
+  shell: flatpak override --user --env=GDK_SCALE=2 com.valvesoftware.Steam
+
+- name: Set caps as esc
+  shell: gsettings set org.gnome.desktop.input-sources xkb-options "['caps:escape']"
+
+- name: Set smooth scrolling in Firefox
+  ansible.builtin.lineinfile:
+    path: /etc/profile.d/use-xinput2.sh
+    line: export MOZ_USE_XINPUT2=1
+    create: yes
+  become: yes
+
+- name: Set hibernate timeout
+  ansible.builtin.lineinfile:
+    path: /etc/systemd/sleep.conf
+    line: HibernateDelaySec=90min
+  become: yes
+  register: sleep_conf
+
+- name: Set login idle behaviour
+  ansible.builtin.lineinfile:
+    path: /etc/systemd/logind.conf
+    line: IdleAction=suspend-then-hibernate
+  become: yes
+  register: idle_action
+
+- name: Set login timeout
+  ansible.builtin.lineinfile:
+    path: /etc/systemd/logind.conf
+    line: IdleActionSec=30min
+  become: yes
+  register: idle_time
+
+- name: Set lid with external power
+  ansible.builtin.lineinfile:
+    path: /etc/systemd/logind.conf
+    line: HandleLidSwitchExternalPower=suspend-then-hibernate
+  become: yes
+  register: lid_external_power
+
+- name: Set lid with battery (deprecated)
+  ansible.builtin.lineinfile:
+    path: /etc/systemd/logind.conf
+    line: HandleLidSwitch=suspend-then-hibernate
+    state: absent
+  become: yes
+  register: lid_battery_deprecated
+
+- name: Set lid with battery
+  ansible.builtin.lineinfile:
+    path: /etc/systemd/logind.conf
+    line: HandleLidSwitch=hibernate
+  become: yes
+  register: lid_battery
+
+- name: Update initramfs if needed
+  shell: update-initramfs -c -k all
+  when: sleep_conf.changed or idle_action.changed or idle_time.changed or lid_external_power.changed or lid_battery.changed or lid_battery_deprecated.changed
+  become: yes

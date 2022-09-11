@@ -1,0 +1,143 @@
+/**
+ * ROFI Color theme
+ * User: andrea
+ * Copyright: None
+ */
+
+/* Global settings and color variables */
+* {
+   maincolour:   #4ec2f7;
+   highlight:    bold #ffffff;
+   urgentcolour: #C40000;
+   fgwhite:      #cfcfcf;
+   bgcolour:     #263647;
+   lightblue:    #bbdded;
+   lightgreen:   #21b089;
+   font: "Fira Code Bold 13";
+   background-color: @bgcolour;
+}
+
+window {
+   background-color: @bgcolour;
+   anchor: north;
+   location: north;
+   y-offset: 0%;
+}
+
+mainbox {
+   background-color: @bgcolour;
+   spacing: 0px;
+   children: [inputbar, message, sidebar, listview];
+}
+
+message {
+   padding: 6px 10px;
+   background-color:@bgcolour;
+}
+
+textbox {
+   text-color:@lightblue;
+   background-color:@bgcolour;
+}
+
+listview {
+   fixed-height: false;
+   dynamic: true;
+   scrollbar: true;
+   spacing: 0px;
+   padding: 1px 0px 0px 0px;
+   margin: 0px 0px 1px 0px;
+   background: @bgcolour;
+}
+
+element {
+   padding: 2px 15px;
+}
+
+element normal.normal {
+   padding: 0px 15px;
+   background-color: @blueentry;
+   text-color: @fgwhite;
+}
+
+element normal.urgent {
+   background-color: @blueentry;
+   text-color: @urgentcolour;
+}
+
+element normal.active {
+   background-color: @blueentry;
+   text-color: @maincolour;
+}
+
+element selected.normal {
+    background-color: @maincolour;
+    text-color: @blueentry;
+}
+
+element selected.urgent {
+    background-color: @urgentcolour;
+    text-color: @bgcolour;
+}
+
+element selected.active {
+    background-color: @maincolour;
+    text-color: @bgcolour;
+}
+
+element alternate.normal {
+    background-color: @blueentry;
+    text-color: @fgwhite;
+}
+
+element alternate.urgent {
+    background-color: @blueentry;
+    text-color: @urgentcolour;
+}
+
+element alternate.active {
+    background-color: @blueentry;
+    text-color: @maincolour;
+}
+
+scrollbar {
+   background-color: @bgcolour;
+   handle-color: @lightgreen;
+   handle-width: 15px;
+}
+
+sidebar {
+   background-color: @bgcolour;
+}
+
+button {
+   background-color: @bgcolour;
+   text-color: @lightblue;
+}
+
+button selected {
+    text-color: @maincolour;
+}
+
+inputbar {
+   background-color: @bgcolour;
+   spacing: 0px;
+}
+
+prompt {
+   padding: 6px 9px;
+   background-color: @maincolour;
+   text-color: @bgcolour;
+}
+
+entry {
+   padding: 6px 10px;
+   background-color: @bgcolour;
+   text-color: @fgwhite;
+}
+
+case-indicator {
+   padding: 6px 10px;
+   text-color: @maincolour;
+   background-color: @bgcolour;
+}
