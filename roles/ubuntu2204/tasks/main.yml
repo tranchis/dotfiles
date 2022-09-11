@@ -108,6 +108,7 @@
 - name: Install snap apps in classic mode
   community.general.flatpak:
     name: "{{ item }}"
+    method: user
   with_items:
     - pycharm-professional
     - com.jetbrains.IntelliJ-IDEA-Ultimate
