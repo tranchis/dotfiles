@@ -23,6 +23,7 @@
     buffer_index_type = 4
     enable_tabline_filetype_icon = true
     enable_statusline_mode = false
+    statusline_unicode = false
 
 # Enable autocomplete layer
 [[layers]]
@@ -34,4 +35,13 @@ auto_completion_tab_key_behavior = "smart"
 name = 'shell'
 default_position = 'top'
 default_height = 30
+
+[[layers]]
+name = "ctrlp"
+
+[[layers]]
+name = "lang#python"
+
+[[layers]]
+name = "lang#clojure"
 
