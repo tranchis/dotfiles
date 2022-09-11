@@ -67,6 +67,7 @@
   become: yes
   with_items:
     - https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-x64
+    - https://upclink.upc.edu/public/download/linux_f5vpn.x86_64.deb
 
 - name: Install rbenv
   shell: /home/linuxbrew/.linuxbrew/bin/brew install rbenv
