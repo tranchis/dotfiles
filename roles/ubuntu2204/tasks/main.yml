@@ -70,6 +70,7 @@
   with_items:
     - https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-x64
     - https://upclink.upc.edu/public/download/linux_f5vpn.x86_64.deb
+    - https://packages.microsoft.com/repos/ms-teams/pool/main/t/teams/teams_1.5.00.10453_amd64.deb
 
 - name: Install rbenv
   shell: /home/linuxbrew/.linuxbrew/bin/brew install rbenv
