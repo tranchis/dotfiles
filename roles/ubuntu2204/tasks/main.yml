@@ -60,6 +60,8 @@
     - libreadline-dev
     - libsqlite3-dev
     - liblzma-dev
+    - python3-tk
+    - tk-dev
 
 - name: Install packages from Internet
   package:
@@ -74,6 +76,9 @@
 
 - name: Install pyenv
   shell: /home/linuxbrew/.linuxbrew/bin/brew install pyenv
+
+- name: Install tkinter
+  shell: /home/linuxbrew/.linuxbrew/bin/brew install python-tk
 
 - name: Install python packages
   package:
