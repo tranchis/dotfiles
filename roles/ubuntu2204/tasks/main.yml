@@ -124,6 +124,7 @@
     - chat.rocket.RocketChat
     - com.discordapp.Discord
     - com.valvesoftware.Steam
+    - com.microsoft.Edge
 
 - name: Scale Steam UI
   shell: flatpak override --user --env=GDK_SCALE=2 com.valvesoftware.Steam
