@@ -62,6 +62,7 @@
     - liblzma-dev
     - python3-tk
     - tk-dev
+    - steam-devices
 
 - name: Install packages from Internet
   package:
