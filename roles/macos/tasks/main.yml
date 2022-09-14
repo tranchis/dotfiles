@@ -53,6 +53,14 @@
   shell: ln -sfn /usr/local/opt/openjdk@8/libexec/openjdk.jdk /Library/Java/JavaVirtualMachines/openjdk-8.jdk
   become: yes
 
+- name: Tap liberica
+  homebrew_tap:
+    name: bell-sw/liberica
+    state: present
+
+- name: Install liberica
+  shell: brew install liberica-jdk11-full
+
 - name: Install pip
   shell: easy_install pip
   become: yes
