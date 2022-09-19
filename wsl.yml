@@ -7,6 +7,4 @@
     - spacemacs
     - tmux
     - { role: ruby, tags: ['ruby'] }
-    - { role: ubuntu-ml, tags: ['ml'] }
-    - docker
     - fix-locale
