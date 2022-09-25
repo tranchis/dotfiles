@@ -84,6 +84,9 @@
 - name: Install tkinter
   shell: /home/linuxbrew/.linuxbrew/bin/brew install python-tk
 
+- name: Install openssl
+  shell: /home/linuxbrew/.linuxbrew/bin/brew install openssl@3
+
 - name: Install python packages
   package:
     name: "{{ item }}"

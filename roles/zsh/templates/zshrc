@@ -146,9 +146,10 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
   export LDFLAGS="${LDFLAGS} -L$(xcrun --show-sdk-path)/usr/lib -L$(brew --prefix bzip2)/lib"
   export CFLAGS="${CFLAGS} -I$(xcrun --show-sdk-path)/usr/include -I$(brew --prefix bzip2)/include"
 else
-  export CFLAGS="${CFLAGS} -I$(brew --prefix python-tk)/include -I$(brew --prefix openssl)/include -I$(brew --prefix bzip2)/include -I$(brew --prefix readline)/include" LDFLAGS="-L$(brew --prefix python-tk)/lib -L$(brew --prefix openssl)/lib -L$(brew --prefix readline)/lib -L$(brew --prefix zlib)/lib -L$(brew --prefix bzip2)/lib"
-  export LDFLAGS="${LDFLAGS} -L$(brew --prefix bzip2)/lib"
-  export CFLAGS="${CFLAGS} -I$(brew --prefix bzip2)/include"
+  export CFLAGS="${CFLAGS} -I$(brew --prefix openssl@3)/include -I$(brew --prefix python-tk)/include -I$(brew --prefix openssl)/include -I$(brew --prefix bzip2)/include -I$(brew --prefix readline)/include"
+  export CPPFLAGS="${CPPFLAGS} -I$(brew --prefix openssl@3)/include -I$(brew --prefix python-tk)/include -I$(brew --prefix openssl)/include -I$(brew --prefix bzip2)/include -I$(brew --prefix readline)/include"
+  export LDFLAGS="${LDFLAGS} -L$(brew --prefix openssl@3)/lib -L$(brew --prefix python-tk)/lib -L$(brew --prefix openssl)/lib -L$(brew --prefix readline)/lib -L$(brew --prefix zlib)/lib -L$(brew --prefix bzip2)/lib"
+  export PKG_CONFIG_PATH="${PKG_CONFIG_PATH} $(brew --prefix openssl@3)/lib/pkgconfig"
 fi
 
 # export SYSTEM_VERSION_COMPAT=1
