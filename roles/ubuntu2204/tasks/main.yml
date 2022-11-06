@@ -24,6 +24,7 @@
   with_items:
     - rake
     - git
+    - alacritty
     - zsh
     - vim
     - ranger
@@ -48,6 +49,7 @@
     - korganizer
     - appmenu-gtk2-module
     - appmenu-gtk3-module
+    - kde-spectacle
     - kdepim
     - kubectl
     - cmake
@@ -66,6 +68,7 @@
     - steam-devices
     - ffmpegthumbnailer
     - gnome-sushi
+    - nvidia-docker2
 
 - name: Install packages from Internet
   package:
@@ -74,7 +77,6 @@
   with_items:
     - https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-x64
     - https://upclink.upc.edu/public/download/linux_f5vpn.x86_64.deb
-    - https://packages.microsoft.com/repos/ms-teams/pool/main/t/teams/teams_1.5.00.10453_amd64.deb
 
 - name: Install rbenv
   shell: /home/linuxbrew/.linuxbrew/bin/brew install rbenv
@@ -211,3 +213,13 @@
 - name: Install tridactyl
   shell: DISPLAY=:1.0 xdg-open /tmp/tridactyl-latest.xpi
   when: tridactyl.changed
+
+- name: Create alacritty config folder
+  file:
+    path: ~/.config/alacritty
+    state: directory
+
+- name: Install alacritty config
+  template:
+    src: alacritty.yml
+    dest: ~/.config/alacritty/alacritty.yml

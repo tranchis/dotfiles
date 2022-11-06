@@ -9,12 +9,6 @@
     state: present
   become: yes
 
-- name: Install lutris repo
-  apt_repository:
-    repo: ppa:lutris-team/lutris
-    state: present
-  become: yes
-
 - name: Install lutris
   apt:
     update_cache: yes

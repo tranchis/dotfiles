@@ -1,7 +1,6 @@
 ---
 - hosts: local
   roles:
-    - repos-ubuntu2010
     - ubuntu2204
     - zsh
     - vim
