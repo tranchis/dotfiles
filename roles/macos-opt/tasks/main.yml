@@ -22,7 +22,7 @@
   # shell: brew install --cask rubymine
 
 - name: Install ruby 2.6.3
-  shell: optflags="-Wno-error=implicit-function-declaration" LDFLAGS="-L$(brew --prefix)/opt/libffi/lib" CPPFLAGS="-I$(brew --prefix)/opt/libffi/include" PKG_CONFIG_PATH="$(brew --prefix)/opt/libffi/lib/pkgconfig" rbenv install 2.6.3
+  shell: optflags="-Wno-error=implicit-function-declaration" LDFLAGS="-L$(brew --prefix)/opt/libffi/lib" CPPFLAGS="-I$(brew --prefix)/opt/libffi/include" PKG_CONFIG_PATH="$(brew --prefix)/opt/libffi/lib/pkgconfig" rbenv install -s 2.6.3
 
 - name: Install Keynote
   shell: mas install 409183694
