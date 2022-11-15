@@ -21,3 +21,6 @@
     src: init.toml
     dest: ~/.SpaceVim.d/init.toml
 
+- name: Install pip vim packages
+  shell: pip install pylint yapf autoflake isort coverage jedi pynvim
+
