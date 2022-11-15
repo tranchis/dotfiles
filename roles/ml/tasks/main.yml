@@ -1,15 +1,11 @@
 ---
 - name: Install pyenv
-  shell: brew install python zlib pyenv xz && brew link pyenv
+  shell: brew install python zlib pyenv xz python-tk@3.10 && brew link pyenv
 
 - name: Install zlib at os level
   become: yes
-  command: installer -pkg /Library/Developer/CommandLineTools/Packages/macOS_SDK_headers_for_macOS_10.14.pkg -target /
+  command: installer -pkg /Library/Developer/CommandLineTools/Packages/macOS_SDK_headers_for_macOS_10.15.pkg -target /
   ignore_errors: yes
-
-- name: Install system pip
-  shell: /usr/bin/easy_install pip
-  become: yes
 
 - name: Install virtualenv
   pip:
@@ -24,11 +20,11 @@
   become: yes
 
 - name: Install python 3.7.4
-  shell: SDKROOT=/Library/Developer/CommandLineTools/SDKs/MacOSX10.14.sdk/ pyenv install 3.7.4
+  shell: SDKROOT=/Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/ pyenv install 3.7.4
   ignore_errors: yes
 
 - name: Install python 3.7.4
-  shell: SDKROOT=/Library/Developer/CommandLineTools/SDKs/MacOSX10.14.sdk/ pyenv global 3.7.4
+  shell: SDKROOT=/Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/ pyenv global 3.7.4
   ignore_errors: yes
 
 - shell: pip3 install --upgrade pip

@@ -61,14 +61,10 @@
 - name: Install liberica
   shell: brew install liberica-jdk11-full
 
-- name: Install pip
-  shell: easy_install pip
-  become: yes
-
 - name: Install trello
   shell: mas install 1278508951
 
-  - name: Install rocket-chat
+- name: Install rocket-chat
   shell: mas install 1086818840
 
 - name: Copy hyper.js config
