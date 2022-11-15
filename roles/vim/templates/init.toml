@@ -24,8 +24,11 @@
     enable_tabline_filetype_icon = true
     enable_statusline_mode = false
     statusline_unicode = false
-    enable_smooth_scrolling = false
     autocomplete_method = "coc"
+
+[[layers]]
+name = "core"
+enable_smooth_scrolling = false
 
 [[custom_plugins]]
   name = 'neoclide/coc.nvim'
