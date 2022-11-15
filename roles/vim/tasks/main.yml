@@ -11,6 +11,11 @@
 - name: Install spf
   shell: bash /tmp/sv-bootstrap.sh
 
+- name: Create .SpaceVim.d
+  file:
+    path: ~/.SpaceVim.d
+    state: directory
+
 - name: Set init config
   template:
     src: init.toml
