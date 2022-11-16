@@ -161,3 +161,4 @@ complete -o nospace -C $(brew --prefix)/bin/mc mc
 export JAVA_HOME=`/usr/libexec/java_home -v 1.8`
 
 alias vim=nvim
+alias vi=nvim
