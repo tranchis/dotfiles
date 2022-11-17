@@ -51,7 +51,6 @@
     - appmenu-gtk3-module
     - kde-spectacle
     - kdepim
-    - kubectl
     - cmake
     - gnome-calendar
     - openssh-server
@@ -69,6 +68,10 @@
     - ffmpegthumbnailer
     - gnome-sushi
     - nvidia-docker2
+    - virtualbox
+    - onedrive
+    - openfortivpn
+    - plasma-nm
 
 - name: Install packages from Internet
   package:
@@ -89,6 +92,9 @@
 
 - name: Install openssl
   shell: /home/linuxbrew/.linuxbrew/bin/brew install openssl@3
+
+- name: Install kubectl
+  shell: /home/linuxbrew/.linuxbrew/bin/brew install kubectl
 
 - name: Install python packages
   package:
@@ -223,3 +229,26 @@
   template:
     src: alacritty.yml
     dest: ~/.config/alacritty/alacritty.yml
+
+- name: Force wayland
+  lineinfile:
+    path: /etc/gdm3/custom.conf
+    regexp: '^WaylandEnable='
+    line: WaylandEnable=true
+  become: yes
+
+- name: Raise open files
+  lineinfile:
+    path: /etc/sysctl.conf
+    line: fs.inotify.max_user_watches=1000000
+  become: yes
+  register: sysctl
+
+- name: Restart sysctl if needed
+  shell: sysctl -p
+  when: sysctl.changed
+  become: yes
+
+- name: Use hybrid graphics mode
+  shell: system76-power graphics hybrid
+
