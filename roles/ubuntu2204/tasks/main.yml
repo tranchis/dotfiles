@@ -16,6 +16,10 @@
   become: yes
   when: my_package_check_deb.rc == 1
 
+- name: Upgrade nodejs repos
+  shell: curl -sL https://deb.nodesource.com/setup_14.x | bash -
+  become: yes
+
 - name: Install base packages
   package:
     name: "{{ item }}"
@@ -72,6 +76,7 @@
     - onedrive
     - openfortivpn
     - plasma-nm
+    - neovim
 
 - name: Install packages from Internet
   package:
