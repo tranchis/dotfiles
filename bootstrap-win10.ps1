@@ -13,6 +13,7 @@ choco install -y anaconda3 --params '"/JustMe /AddToPath"'
 
 irm get.scoop.sh | iex
 
+scoop bucket add extras
 scoop install neovim
 
 Install-PackageProvider -Name NuGet -Confirm:$False
