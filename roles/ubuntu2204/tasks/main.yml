@@ -1,23 +1,10 @@
 ---
-- name: Check if dropbox is installed
-  command: dpkg-query -W dropbox
-  register: my_package_check_deb
-  failed_when: my_package_check_deb.rc > 1
-  changed_when: my_package_check_deb.rc == 1
-
-- name: Download dropbox
-  get_url:
-    url: https://www.dropbox.com/download?dl=packages/ubuntu/dropbox_2020.03.04_amd64.deb
-    dest: /tmp/
-  when: my_package_check_deb.rc == 1
-
-- name: Install dropbox
-  apt: deb="/tmp/dropbox_2020.03.04_amd64.deb"
-  become: yes
-  when: my_package_check_deb.rc == 1
-
 - name: Upgrade nodejs repos
   shell: curl -sL https://deb.nodesource.com/setup_14.x | bash -
+  become: yes
+
+- name: Upgrade nvidia repos
+  shell: distribution=$(. /etc/os-release;echo $ID$VERSION_ID) && curl -fsSL https://nvidia.github.io/libnvidia-container/gpgkey | sudo gpg --dearmor --batch --yes -o /usr/share/keyrings/nvidia-container-toolkit-keyring.gpg && curl -s -L https://nvidia.github.io/libnvidia-container/$distribution/libnvidia-container.list | sed 's#deb https://#deb [signed-by=/usr/share/keyrings/nvidia-container-toolkit-keyring.gpg] https://#g' | sudo tee /etc/apt/sources.list.d/nvidia-container-toolkit.list && apt-get update
   become: yes
 
 - name: Install base packages
@@ -36,9 +23,7 @@
     - x11-xkb-utils
     - xvfb
     - ethtool
-    - node-gyp
     - python3-gpg
-    - npm
     - nodejs
     - libffi-dev
     - libreadline-dev
@@ -77,14 +62,11 @@
     - openfortivpn
     - plasma-nm
     - neovim
+    - locales
 
-- name: Install packages from Internet
-  package:
-    deb: "{{ item }}"
+- name: Install locales
+  shell: locale-gen en_US.UTF-8
   become: yes
-  with_items:
-    - https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-x64
-    - https://upclink.upc.edu/public/download/linux_f5vpn.x86_64.deb
 
 - name: Install rbenv
   shell: /home/linuxbrew/.linuxbrew/bin/brew install rbenv
@@ -119,45 +101,6 @@
   with_items:
     - virtualenv
     - virtualenvwrapper
-
-- name: Install apps
-  package:
-    name: "{{ item }}"
-    state: latest
-  become: yes
-  with_items:
-    - fonts-firacode
-    - thunderbird
-
-- name: Add flathub repo
-  shell: flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-
-- name: Install snap apps in classic mode
-  community.general.flatpak:
-    name: "{{ item }}"
-    method: user
-  with_items:
-    - pycharm-professional
-    - com.jetbrains.IntelliJ-IDEA-Ultimate
-    - rubymine
-    - chat.rocket.RocketChat
-    - com.discordapp.Discord
-    - com.valvesoftware.Steam
-    - com.microsoft.Edge
-    - org.videolan.VLC
-
-- name: Scale Steam UI
-  shell: flatpak override --user --env=GDK_SCALE=2 com.valvesoftware.Steam
-
-- name: Set caps as esc
-  shell: gsettings set org.gnome.desktop.input-sources xkb-options "['caps:escape']"
-
-- name: Set smooth scrolling in Firefox
-  ansible.builtin.lineinfile:
-    path: /etc/profile.d/use-xinput2.sh
-    line: export MOZ_USE_XINPUT2=1
-    create: yes
-  become: yes
 
 - name: Set hibernate timeout
   ansible.builtin.lineinfile:
@@ -210,38 +153,6 @@
   become: yes
   register: lid_battery
 
-- name: Update initramfs if needed
-  shell: update-initramfs -c -k all
-  when: sleep_conf.changed or idle_action.changed or idle_time.changed or lid_external_power.changed or lid_external_power_deprecated.changed or lid_battery.changed or lid_battery_deprecated.changed
-  become: yes
-
-- name: Download tridactyl
-  get_url:
-    url: https://tridactyl.cmcaine.co.uk/betas/tridactyl-latest.xpi
-    dest: /tmp/tridactyl-latest.xpi
-  register: tridactyl
-
-- name: Install tridactyl
-  shell: DISPLAY=:1.0 xdg-open /tmp/tridactyl-latest.xpi
-  when: tridactyl.changed
-
-- name: Create alacritty config folder
-  file:
-    path: ~/.config/alacritty
-    state: directory
-
-- name: Install alacritty config
-  template:
-    src: alacritty.yml
-    dest: ~/.config/alacritty/alacritty.yml
-
-- name: Force wayland
-  lineinfile:
-    path: /etc/gdm3/custom.conf
-    regexp: '^WaylandEnable='
-    line: WaylandEnable=true
-  become: yes
-
 - name: Raise open files
   lineinfile:
     path: /etc/sysctl.conf
@@ -253,7 +164,3 @@
   shell: sysctl -p
   when: sysctl.changed
   become: yes
-
-- name: Use hybrid graphics mode
-  shell: system76-power graphics hybrid
-
