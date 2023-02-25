@@ -4,8 +4,7 @@ Set-ExecutionPolicy Bypass -Scope Process -Force; iex ((New-Object System.Net.We
 
 Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux
 
-choco upgrade --allow-empty-checksums -y battle.net
-choco upgrade -y firefox thunderbird pycharm rubymine intellijidea-ultimate whatsapp docker-desktop dropbox battle.net hyper vim steam git git-lfs firacode-ttf itunes goggalaxy slack vcxsrv nodejs.install visualstudio2017buildtools
+choco upgrade -y firefox thunderbird pycharm rubymine intellijidea-ultimate whatsapp docker-desktop dropbox hyper vim steam git git-lfs firacode-ttf itunes goggalaxy slack vcxsrv nodejs.install visualstudio2017buildtools
 choco upgrade -y etcher autohotkey icloud virtualbox winrar virtualbox.extensionpack hwmonitor intelpowergadget adobereader cpu-z jdk8 rocketchat hwinfo intellijidea-ultimate
 choco upgrade -y vlc cmake openssl vscode libreoffice-fresh postman discord octave pyenv-win vagrant nextcloud-client lein razer-synapse-3 forticlientvpn wsl-ubuntu-2204 powertoys
 choco install -y mysql --version=5.7.18
