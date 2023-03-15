@@ -2,13 +2,13 @@
 - hosts: local
   roles:
     - ubuntu2204
-    # - { role: ubuntu2204-gui, tags: ['gui'] }
+    - { role: ubuntu2204-gui, tags: ['gui'] }
     - zsh
     - vim
     - spacemacs
     - tmux
     - docker
-    # - { role: ubuntu2004-ml, tags: ['ml'] }
+    - { role: ubuntu2004-ml, tags: ['ml'] }
     - lutris
     - { role: clojure, tags: ['clojure'] }
     # - { role: hpai, tags: ['hpai'] }

@@ -31,6 +31,7 @@
   become: yes
   with_items:
     - flatpak
+    - steam-devices
 
 - name: Install packages from Internet
   package:
@@ -38,7 +39,6 @@
   become: yes
   with_items:
     - https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-x64
-    - https://upclink.upc.edu/public/download/linux_f5vpn.x86_64.deb
 
 - name: Install apps
   package:
@@ -61,11 +61,15 @@
     - pycharm-professional
     - com.jetbrains.IntelliJ-IDEA-Ultimate
     - rubymine
+    - com.slack.Slack
+    - com.nextcloud.desktopclient.nextcloud
     - chat.rocket.RocketChat
     - com.discordapp.Discord
     - com.valvesoftware.Steam
     - com.microsoft.Edge
     - org.videolan.VLC
+    - com.github.tchx84.Flatseal
+    - com.skype.Client
 
 - name: Scale Steam UI
   shell: flatpak override --user --env=GDK_SCALE=2 com.valvesoftware.Steam
@@ -114,3 +118,4 @@
 
 - name: Use hybrid graphics mode
   shell: system76-power graphics hybrid
+  ignore_errors: yes

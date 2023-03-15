@@ -3,6 +3,7 @@
   git:
     repo: https://github.com/pyenv/pyenv.git
     dest: ~/.pyenv
+  ignore_errors: yes
 
 - name: Install bzip2 devel
   apt:
