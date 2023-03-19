@@ -70,6 +70,7 @@
     - org.videolan.VLC
     - com.github.tchx84.Flatseal
     - com.skype.Client
+    - org.zotero.Zotero
 
 - name: Scale Steam UI
   shell: flatpak override --user --env=GDK_SCALE=2 com.valvesoftware.Steam
