@@ -13,13 +13,23 @@ choco install -y anaconda3 --params '"/JustMe /AddToPath"'
 irm get.scoop.sh | iex
 
 scoop bucket add extras
-scoop install neovim
+scoop install neovim cwrsync
+winget install oh-my-posh
 
 Install-PackageProvider -Name NuGet -Confirm:$False
 Install-Module -Name 'posh-git' -Scope 'CurrentUser' -Confirm:$False -Force
 del $PROFILE
 New-Item -Type File -Path $PROFILE -Force
 Add-Content -Path $PROFILE -value "Import-Module 'posh-git'"
+Add-Content -Path $PROFILE -value "oh-my-posh init pwsh | Invoke-Expression"
+Add-Content -Path $PROFILE -value "Import-Module PSReadLine"
+Add-Content -Path $PROFILE -value "Set-PSReadLineOption -PredictionSource History"
+Add-Content -Path $PROFILE -value "Set-PSReadLineOption -PredictionViewStyle ListView"
+Add-Content -Path $PROFILE -value "Set-PSReadLineOption -EditMode Windows"
+Get-PoshThemes
+oh-my-posh font install FiraCode
+Install-Module PowershellGet -Force
+Install-Module -Name PSReadLine -AllowPrerelease -Scope CurrentUser -Force -SkipPublisherCheck
 
 dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
 dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
