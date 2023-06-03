@@ -30,6 +30,11 @@
     src: zshrc
     dest: ~/.zshrc
 
+- name: Copy p10k.zsh
+  template:
+    src: p10k.zsh
+    dest: ~/.p10k.zsh
+
 - name: Install powerline9k
   git:
     repo: https://github.com/bhilburn/powerlevel9k.git
