@@ -2,7 +2,7 @@
 - hosts: local
   roles:
     - ubuntu2204
-    - { role: ubuntu2204-gui, tags: ['gui'] }
+    # - { role: ubuntu2204-gui, tags: ['gui'] }
     - zsh
     - vim
     - spacemacs
