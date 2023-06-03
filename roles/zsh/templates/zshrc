@@ -116,6 +116,10 @@ export DISPLAY=:0.0
 export PATH=~/bin/:$PYENV_ROOT/bin:/opt/homebrew/bin:/snap/bin/:$PATH
 export WORKON_HOME=~/Envs
 
+# export PYENV_ROOT="$HOME/.pyenv"
+# export PATH="$PYENV_ROOT/bin:$PATH"
+# eval "$(pyenv init --path)"
+# eval "$(pyenv init -)"
 eval "$(rbenv init -)"
 unset JAVA_HOME
 
@@ -157,10 +161,19 @@ POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(virtualenv context dir vcs)
 autoload -U +X bashcompinit && bashcompinit
 complete -o nospace -C $(brew --prefix)/bin/mc mc
 
-alias vim=nvim
-alias vi=nvim
 
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init --path)"
-eval "$(pyenv init -)"
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/home/sergio/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/home/sergio/anaconda3/etc/profile.d/conda.sh" ]; then
+        . "/home/sergio/anaconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/home/sergio/anaconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
