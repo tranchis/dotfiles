@@ -77,6 +77,8 @@
 
 - name: Show status bar in Safari
   shell: defaults write com.apple.Safari ShowStatusBar -boolean true
+  become: yes
 
 - name: Show status bar in Finder
   shell: defaults write com.apple.finder ShowStatusBar -bool true
+  become: yes
