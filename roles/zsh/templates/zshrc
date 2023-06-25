@@ -185,3 +185,4 @@ unset __conda_setup
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+export JAVA_HOME=`/usr/libexec/java_home -v 1.8`
