@@ -7,8 +7,10 @@ PROD=$(softwareupdate -l |
   sed -e 's/^ *//' |
   tr -d '\n')
 softwareupdate -i "$PROD" --verbose;
+sudo softwareupdate --install-rosetta
 
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+eval "$(/opt/homebrew/bin/brew shellenv)"
 
 pip3 install ansible
 brew install ansible

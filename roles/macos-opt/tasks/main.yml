@@ -4,6 +4,11 @@
     name: wagoodman/dive
     state: present
 
+- name: Tap core
+  homebrew_tap:
+    name: homebrew/core
+    state: present
+
 - name: Install opt apps
   shell: brew install dive exiftool htop yarn gnupg postgresql ranger
 
@@ -18,8 +23,11 @@
   become: yes
 
 - name: Install opt casks
-  shell: brew install --cask mactex-no-gui balenaetcher softraid sensiblesidebuttons gog-galaxy grandperspective vlc steam postman visual-studio-code bettertouchtool clion pycharm intellij-idea
+  shell: brew install --cask mactex-no-gui balenaetcher sensiblesidebuttons gog-galaxy grandperspective vlc steam postman visual-studio-code bettertouchtool clion pycharm intellij-idea
   # shell: brew install --cask rubymine
+  register: result
+  retries: 30
+  until: result is not failed
 
 - name: Install ruby 2.6.3
   shell: optflags="-Wno-error=implicit-function-declaration" LDFLAGS="-L$(brew --prefix)/opt/libffi/lib" CPPFLAGS="-I$(brew --prefix)/opt/libffi/include" PKG_CONFIG_PATH="$(brew --prefix)/opt/libffi/lib/pkgconfig" rbenv install -s 2.6.3

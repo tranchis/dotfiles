@@ -43,8 +43,7 @@
   shell: brew tap homebrew/cask-fonts && brew install --cask font-fira-code font-hack-nerd-font
 
 - name: Install casks
-  shell: brew install --cask displaycal viscosity jumpcut slack istat-menus caffeine discord hyper vagrant firefox papers amethyst battle-net sensiblesidebuttons dropbox nextcloud
-  # shell: brew install --cask docker
+  shell: brew install --cask docker displaycal viscosity jumpcut slack istat-menus caffeine discord hyper vagrant firefox papers amethyst battle-net sensiblesidebuttons dropbox nextcloud geekbench
 
 - name: Install Java 11
   shell: brew install openjdk@11
