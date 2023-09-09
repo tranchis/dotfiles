@@ -1,10 +1,15 @@
 iwr -useb get.scoop.sh -outfile scoop.ps1
 .\scoop.ps1
+del scoop.ps1
 
 scoop bucket add extras
 scoop update
 scoop install neovim cwrsync
-winget install oh-my-posh
+winget install JanDeDobbeleer.OhMyPosh -s winget
+
+if (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")) { Start-Process powershell.exe "-NoProfile -ExecutionPolicy Bypass -File `"$PSCommandPath`"" -Verb RunAs; exit }
+
+Set-ExecutionPolicy Bypass -Scope Process -Force; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
 
 Install-PackageProvider -Name NuGet -Confirm:$False
 Install-Module -Name 'posh-git' -Scope 'CurrentUser' -Confirm:$False -Force
@@ -20,10 +25,6 @@ Get-PoshThemes
 oh-my-posh font install FiraCode
 Install-Module PowershellGet -Force
 Install-Module -Name PSReadLine -AllowPrerelease -Scope CurrentUser -Force -SkipPublisherCheck
-
-if (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")) { Start-Process powershell.exe "-NoProfile -ExecutionPolicy Bypass -File `"$PSCommandPath`"" -Verb RunAs; exit }
-
-Set-ExecutionPolicy Bypass -Scope Process -Force; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
 
 Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux
 
