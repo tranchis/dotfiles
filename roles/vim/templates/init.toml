@@ -16,6 +16,8 @@
     enable_statusline_mode = false
     statusline_unicode = false
     autocomplete_method = "coc"
+    vimcompatible = true
+    bootstrap_after = 'myspacevim#after'
 
 [[layers]]
 name = "core"

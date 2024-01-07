@@ -16,10 +16,20 @@
     path: ~/.SpaceVim.d
     state: directory
 
+- name: Create autoload folder
+  file:
+    path: ~/.SpaceVim.d/autoload
+    state: directory
+
 - name: Set init config
   template:
     src: init.toml
     dest: ~/.SpaceVim.d/init.toml
+
+- name: Set init bootstrap
+  template:
+    src: myspacevim.vim
+    dest: ~/.SpaceVim.d/autoload/myspacevim.vim
 
 - name: Install pip vim packages
   shell: python3 -m pip install --user --upgrade pynvim pylint yapf autoflake isort coverage jedi
