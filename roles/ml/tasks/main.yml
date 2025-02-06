@@ -2,45 +2,6 @@
 - name: Install pyenv
   shell: brew install python zlib pyenv xz python-tk@3.10 && brew link pyenv
 
-- name: Install zlib at os level
-  become: yes
-  command: installer -pkg /Library/Developer/CommandLineTools/Packages/macOS_SDK_headers_for_macOS_10.15.pkg -target /
-  ignore_errors: yes
-
 - name: Install virtualenv
-  pip:
-    name: virtualenv
-    state: latest
-  become: yes
-
-- name: Install virtualenvwrapper
-  pip:
-    name: virtualenvwrapper
-    state: latest
-  become: yes
-
-- name: Install python 3.7.4
-  shell: SDKROOT=/Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/ pyenv install 3.7.4
-  ignore_errors: yes
-
-- name: Install python 3.7.4
-  shell: SDKROOT=/Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/ pyenv global 3.7.4
-  ignore_errors: yes
-
-- shell: pip3 install --upgrade pip
-  become: yes
-
-- name: Install virtualenv
-  pip:
-    executable: pip3
-    name: virtualenv
-    state: latest
-  become: yes
-
-- name: Install virtualenvwrapper
-  pip:
-    executable: pip3
-    name: virtualenvwrapper
-    state: latest
-  become: yes
+  shell: brew install virtualenv virtualenvwrapper pyenv-virtualenv pyenv-virtualenvwrapper
 

@@ -5,7 +5,7 @@
   become: yes
 
 - name: Install packages
-  shell: brew install vim neovim node restic gnu-tar inetutils the_silver_searcher zsh zsh-completions zsh-autosuggestions tmux mosh wget leiningen mas git-lfs rbenv bash go ruby openjdk
+  shell: brew install vim neovim node restic gnu-tar inetutils the_silver_searcher zsh zsh-completions zsh-autosuggestions tmux mosh wget leiningen mas git-lfs rbenv bash go ruby openjdk smartmontools ffmpeg
 
 # - name: Install packages from source
 #   shell: brew install --build-from-source vault
@@ -26,11 +26,6 @@
   become_user: root
   command: "chsh -s /bin/zsh {{ lookup('env','USER') }}"
 
-- name: Tap fonts
-  homebrew_tap:
-    name: homebrew/cask-fonts
-    state: present
-
 - name: Tap versions
   homebrew_tap:
     name: caskroom/versions
@@ -40,10 +35,10 @@
   shell: brew tap d12frosted/emacs-plus && brew install emacs-plus && brew link emacs-plus
 
 - name: Install fira code
-  shell: brew tap homebrew/cask-fonts && brew install --cask font-fira-code font-hack-nerd-font
+  shell: brew install --cask font-fira-code font-hack-nerd-font
 
 - name: Install casks
-  shell: brew install --cask docker displaycal viscosity jumpcut slack istat-menus caffeine discord hyper vagrant firefox papers amethyst battle-net sensiblesidebuttons dropbox nextcloud geekbench
+  shell: brew install --cask docker displaycal viscosity jumpcut slack istat-menus caffeine discord hyper vagrant firefox papers sensiblesidebuttons dropbox nextcloud geekbench rar skype notion
 
 - name: Install Java 11
   shell: brew install openjdk@11
@@ -65,6 +60,12 @@
 
 - name: Install rocket-chat
   shell: mas install 1086818840
+
+- name: Install Goodnotes
+  shell: mas install 1444383602
+
+- name: Install Word
+  shell: mas install 462054704
 
 - name: Copy hyper.js config
   template:

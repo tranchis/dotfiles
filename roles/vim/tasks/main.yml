@@ -32,5 +32,5 @@
     dest: ~/.SpaceVim.d/autoload/myspacevim.vim
 
 - name: Install pip vim packages
-  shell: python3 -m pip install --user --upgrade pynvim pylint yapf autoflake isort coverage jedi
+  shell: /usr/bin/python3 -m pip install --user --upgrade pynvim pylint yapf autoflake isort coverage jedi
 

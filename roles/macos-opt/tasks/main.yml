@@ -4,13 +4,8 @@
     name: wagoodman/dive
     state: present
 
-- name: Tap core
-  homebrew_tap:
-    name: homebrew/core
-    state: present
-
 - name: Install opt apps
-  shell: brew install dive exiftool htop yarn gnupg postgresql ranger
+  shell: brew install dive exiftool htop yarn gnupg postgresql ranger veracrypt
 
 - name: Install handbrake
   shell: brew install --cask handbrake
@@ -23,20 +18,22 @@
   become: yes
 
 - name: Install opt casks
-  shell: brew install --cask mactex-no-gui balenaetcher sensiblesidebuttons gog-galaxy grandperspective vlc steam postman visual-studio-code bettertouchtool clion pycharm intellij-idea
-  # shell: brew install --cask rubymine
+  shell: brew install --cask mactex-no-gui balenaetcher sensiblesidebuttons grandperspective vlc postman visual-studio-code bettertouchtool clion pycharm intellij-idea dcp-o-matic lm-studio zotero
   register: result
   retries: 30
   until: result is not failed
-
-- name: Install ruby 2.6.3
-  shell: optflags="-Wno-error=implicit-function-declaration" LDFLAGS="-L$(brew --prefix)/opt/libffi/lib" CPPFLAGS="-I$(brew --prefix)/opt/libffi/include" PKG_CONFIG_PATH="$(brew --prefix)/opt/libffi/lib/pkgconfig" rbenv install -s 2.6.3
 
 - name: Install Keynote
   shell: mas install 409183694
 
 - name: Install Numbers
   shell: mas install 409203825
+
+- name: Install Powerpoint
+  shell: mas install 462062816
+
+- name: Install OneDrive
+  shell: mas install 823766827
 
 - name: Install Pages
   shell: mas install 409201541
@@ -45,7 +42,10 @@
   shell: mas install 497799835
 
 - name: Install Whatsapp
-  shell: mas install 1147396723
+  shell: mas install 310633997
+
+- name: Install Notability
+  shell: mas install 360593530
 
 - name: Install pocket extension
   shell: mas install 1477385213

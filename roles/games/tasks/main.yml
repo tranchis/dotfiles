@@ -1,0 +1,8 @@
+---
+- name: Install opt casks
+  shell: brew install --cask gog-galaxy steam whisky battle-net
+  register: result
+  retries: 30
+  until: result is not failed
+
+

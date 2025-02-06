@@ -13,4 +13,5 @@
     - { role: ml, tags: ['ml'] }
     - { role: tmux, tags: ['tmux'] }
     - { role: set-java-8, tags: ['java'] }
+    - { role: games, tags: ['games'] }
 
