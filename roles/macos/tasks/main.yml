@@ -38,7 +38,7 @@
   shell: brew install --cask font-fira-code font-hack-nerd-font
 
 - name: Install casks
-  shell: brew install --cask docker displaycal viscosity jumpcut slack istat-menus caffeine discord hyper vagrant firefox papers sensiblesidebuttons dropbox nextcloud geekbench rar skype notion coconutbattery
+  shell: brew install --cask docker displaycal viscosity jumpcut slack istat-menus caffeine discord hyper vagrant firefox papers sensiblesidebuttons dropbox nextcloud geekbench rar skype notion coconutbattery wezterm
 
 - name: Install Java 11
   shell: brew install openjdk@11
@@ -82,3 +82,9 @@
 - name: Show status bar in Finder
   shell: defaults write com.apple.finder ShowStatusBar -bool true
   become: yes
+
+- name: Install wezterm configuration
+  template:
+    src: wezterm.lua
+    dest: ~/.wezterm.lua
+

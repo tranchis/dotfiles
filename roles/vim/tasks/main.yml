@@ -24,8 +24,8 @@
 - name: Install all packages for lazyman
   shell: PATH=$PATH:~/.local/bin ~/.local/bin/lazyman -B -q -Q
 
-- name: Install wezterm configuration
+- name: Install LazyVim configuration
   template:
-    src: wezterm.lua
-    dest: ~/.wezterm.lua
+    src: options.lua
+    dest: ~/.config/nvim-LazyVim/lua/config/options.lua
 
