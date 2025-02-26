@@ -3,8 +3,8 @@
   roles:
     - ubuntu2204
     # - { role: ubuntu2204-gui, tags: ['gui'] }
-    - zsh
-    - vim
+    - { role: zsh, tags: ['zsh'] }
+    - { role: vim, tags: ['vim'] }
     - spacemacs
     - tmux
     - docker

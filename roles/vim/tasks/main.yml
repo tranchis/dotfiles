@@ -1,6 +1,6 @@
 ---
 - name: Install nvim, lazygit and wezterm
-  shell: brew install nvim lazygit wezterm
+  shell: brew install nvim lazygit
 
 - gem:
     name: rake
@@ -19,10 +19,10 @@
   ignore_errors: yes
 
 - name: Install lazyman
-  shell: ~/.config/nvim-Lazyman/lazyman.sh -q -Q
+  shell: ~/.config/nvim-Lazyman/lazyman.sh -q -Q -y
 
 - name: Install all packages for lazyman
-  shell: PATH=$PATH:~/.local/bin ~/.local/bin/lazyman -B -q -Q
+  shell: PATH=$PATH:~/.local/bin ~/.local/bin/lazyman -B -q -Q -y
 
 - name: Install LazyVim configuration
   template:
