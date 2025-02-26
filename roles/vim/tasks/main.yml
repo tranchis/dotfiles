@@ -1,36 +1,31 @@
 ---
+- name: Install nvim, lazygit and wezterm
+  shell: brew install nvim lazygit wezterm
+
 - gem:
     name: rake
 
-- name: Download spf
-  get_url:
-    url: https://spacevim.org/install.sh
-    dest: /tmp/sv-bootstrap.sh
-    mode: 0755
-
-- name: Install spf
-  shell: bash /tmp/sv-bootstrap.sh
-
-- name: Create .SpaceVim.d
+- name: Create config folder
   file:
-    path: ~/.SpaceVim.d
+    path: "{{ item }}"
     state: directory
+  with_items:
+    - "~/.config"
 
-- name: Create autoload folder
-  file:
-    path: ~/.SpaceVim.d/autoload
-    state: directory
+- name: Download lazyman
+  git:
+    repo: https://github.com/doctorfree/nvim-lazyman
+    dest: ~/.config/nvim-Lazyman
+  ignore_errors: yes
 
-- name: Set init config
+- name: Install lazyman
+  shell: ~/.config/nvim-Lazyman/lazyman.sh -q -Q
+
+- name: Install all packages for lazyman
+  shell: PATH=$PATH:~/.local/bin ~/.local/bin/lazyman -B -q -Q
+
+- name: Install wezterm configuration
   template:
-    src: init.toml
-    dest: ~/.SpaceVim.d/init.toml
-
-- name: Set init bootstrap
-  template:
-    src: myspacevim.vim
-    dest: ~/.SpaceVim.d/autoload/myspacevim.vim
-
-- name: Install pip vim packages
-  shell: /usr/bin/python3 -m pip install --user --upgrade pynvim pylint yapf autoflake isort coverage jedi
+    src: wezterm.lua
+    dest: ~/.wezterm.lua
 

@@ -120,14 +120,8 @@ if [[ "$OSTYPE" == "linux-gnu"* ]]; then
 fi
 
 export DISPLAY=:0.0
-export PATH=~/bin/:$PYENV_ROOT/bin:/opt/homebrew/bin:/snap/bin/:$PATH
+export PATH=~/bin/:/opt/homebrew/bin:/snap/bin/:$PATH
 export WORKON_HOME=~/Envs
-
-# export PYENV_ROOT="$HOME/.pyenv"
-# export PATH="$PYENV_ROOT/bin:$PATH"
-# eval "$(pyenv init --path)"
-eval "$(pyenv init -)"
-eval "$(rbenv init -)"
 unset JAVA_HOME
 
 if [[ "$OSTYPE" == "darwin"* ]]; then
@@ -155,7 +149,7 @@ export CPPFLAGS="-I$(brew --prefix)/opt/mysql-client/include -I$(brew --prefix)/
 export OPENBLAS="$(brew --prefix openblas)"
 
 export PKG_CONFIG_PATH="$(brew --prefix)/opt/mysql-client/lib/pkgconfig:$(brew --prefix)/opt/postgresql@10/lib/pkgconfig:$(brew --prefix)/opt/libffi/lib/pkgconfig"
-export PATH="$(brew --prefix)/opt/postgresql@10/bin:$PATH"
+export PATH="$(brew --prefix)/opt/postgresql@10/bin:~/.local/bin:$PATH"
 
 if [[ "$OSTYPE" == "darwin"* ]]; then
   export CFLAGS="${CFLAGS} -I$(brew --prefix python-tk)/include -I$(brew --prefix openssl)/include -I$(brew --prefix bzip2)/include -I$(brew --prefix readline)/include -I$(xcrun --show-sdk-path)/usr/include" LDFLAGS="-L$(brew --prefix python-tk)/lib -L$(brew --prefix openssl)/lib -L$(brew --prefix readline)/lib -L$(brew --prefix zlib)/lib -L$(brew --prefix bzip2)/lib"
@@ -194,3 +188,26 @@ unset __conda_setup
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+alias vim="nvim"
+alias vi="nvim"
+alias oldvim="vim"
+if command -v zoxide > /dev/null; then
+  eval "$(zoxide init zsh)"
+fi
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+# Source the Lazyman shell initialization for aliases and nvims selector
+# shellcheck source=.config/nvim-Lazyman/.lazymanrc
+[ -f ~/.config/nvim-Lazyman/.lazymanrc ] && source ~/.config/nvim-Lazyman/.lazymanrc
+# Source the Lazyman .nvimsbind for nvims key binding
+# shellcheck source=.config/nvim-Lazyman/.nvimsbind
+[ -f ~/.config/nvim-Lazyman/.nvimsbind ] && source ~/.config/nvim-Lazyman/.nvimsbind
+
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
+eval "$(rbenv init -)"
+export NVIM_APPNAME="nvim-LazyVim"
