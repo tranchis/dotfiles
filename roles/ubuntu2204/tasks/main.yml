@@ -63,6 +63,11 @@
     - neovim
     - locales
     - wakeonlan
+    - python3
+    - python-is-python3
+    - python3-venv
+    - libgoogle-perftools4
+    - libtcmalloc-minimal4
 
 - name: Install locales
   shell: locale-gen en_US.UTF-8
