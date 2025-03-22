@@ -26,6 +26,9 @@
 
 - name: Install LazyVim configuration
   template:
-    src: options.lua
-    dest: ~/.config/nvim-LazyVim/lua/config/options.lua
+    src: "{{ item }}"
+    dest: "~/.config/nvim-LazyVim/lua/config/{{ item }}"
+  with_items:
+    - options.lua
+    - lazy.lua
 
