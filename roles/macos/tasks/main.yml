@@ -5,7 +5,7 @@
   become: yes
 
 - name: Install packages
-  shell: brew install vim neovim node restic gnu-tar inetutils the_silver_searcher zsh zsh-completions zsh-autosuggestions tmux mosh wget leiningen mas git-lfs rbenv bash go ruby openjdk smartmontools ffmpeg
+  shell: brew install vim neovim node restic gnu-tar inetutils the_silver_searcher zsh zsh-completions zsh-autosuggestions tmux mosh wget leiningen mas git-lfs rbenv bash go ruby openjdk smartmontools ffmpeg cmake
 
 # - name: Install packages from source
 #   shell: brew install --build-from-source vault
