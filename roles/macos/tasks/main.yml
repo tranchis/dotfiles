@@ -38,7 +38,7 @@
   shell: brew install --cask font-fira-code font-hack-nerd-font
 
 - name: Install casks
-  shell: brew install --cask docker displaycal viscosity jumpcut slack istat-menus caffeine discord hyper vagrant firefox papers sensiblesidebuttons dropbox nextcloud geekbench rar skype notion coconutbattery wezterm
+  shell: brew install --cask docker displaycal viscosity jumpcut slack istat-menus caffeine discord hyper vagrant firefox papers sensiblesidebuttons dropbox nextcloud geekbench rar skype notion coconutbattery wezterm neovide
 
 - name: Install Java 11
   shell: brew install openjdk@11
