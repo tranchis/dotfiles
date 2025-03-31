@@ -32,3 +32,9 @@
     - options.lua
     - lazy.lua
 
+- name: Install LazyVim plugin configuration
+  template:
+    src: "{{ item }}"
+    dest: "~/.config/nvim-LazyVim/lua/plugins/{{ item }}"
+  with_items:
+    - dap-ui.lua
