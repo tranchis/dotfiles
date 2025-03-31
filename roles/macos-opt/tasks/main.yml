@@ -53,6 +53,9 @@
 - name: Install vimium
   shell: mas install 1480933944
 
+- name: Install NordVPN
+  shell: mas install 905953485
+
 - name: Link to xcode
   shell: xcode-select -s /Applications/Xcode.app/Contents/Developer
   become: yes
@@ -66,3 +69,5 @@
 
 - name: Install Intellij IDEA
   shell: brew install --cask intellij-idea
+
+
