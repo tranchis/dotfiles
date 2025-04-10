@@ -5,10 +5,10 @@
     state: present
 
 - name: Install opt apps
-  shell: brew install dive exiftool htop yarn gnupg postgresql ranger veracrypt
+  shell: HOMEBREW_CASK_OPTS="--appdir=~/Applications" brew install dive exiftool htop yarn gnupg postgresql ranger veracrypt
 
 - name: Install handbrake
-  shell: brew install --cask handbrake
+  shell: HOMEBREW_CASK_OPTS="--appdir=~/Applications" brew install --cask handbrake
 
 - name: Install minio
   get_url:
@@ -18,7 +18,7 @@
   become: yes
 
 - name: Install opt casks
-  shell: brew install --cask mactex-no-gui balenaetcher sensiblesidebuttons grandperspective vlc postman visual-studio-code bettertouchtool clion pycharm intellij-idea dcp-o-matic lm-studio zotero
+  shell: HOMEBREW_CASK_OPTS="--appdir=~/Applications" brew install --cask mactex-no-gui balenaetcher sensiblesidebuttons grandperspective vlc postman visual-studio-code bettertouchtool clion pycharm intellij-idea dcp-o-matic lm-studio zotero protege
   register: result
   retries: 30
   until: result is not failed
@@ -68,6 +68,6 @@
   shell: mas install 1295203466
 
 - name: Install Intellij IDEA
-  shell: brew install --cask intellij-idea
+  shell: HOMEBREW_CASK_OPTS="--appdir=~/Applications" brew install --cask intellij-idea
 
 

@@ -17,4 +17,4 @@
   become: yes
 
 - name: Install rbenv
-  shell: brew install rbenv
+  shell: HOMEBREW_CASK_OPTS="--appdir=~/Applications" brew install rbenv

@@ -1,6 +1,6 @@
 ---
 - name: Install nvim, lazygit and wezterm
-  shell: brew install nvim lazygit
+  shell: HOMEBREW_CASK_OPTS="--appdir=~/Applications" brew install nvim lazygit
 
 - gem:
     name: rake

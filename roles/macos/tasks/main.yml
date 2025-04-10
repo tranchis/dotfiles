@@ -5,16 +5,16 @@
   become: yes
 
 - name: Install packages
-  shell: brew install vim neovim node restic gnu-tar inetutils the_silver_searcher zsh zsh-completions zsh-autosuggestions tmux mosh wget leiningen mas git-lfs rbenv bash go ruby openjdk smartmontools ffmpeg cmake
+  shell: HOMEBREW_CASK_OPTS="--appdir=~/Applications" brew install vim neovim node restic gnu-tar inetutils the_silver_searcher zsh zsh-completions zsh-autosuggestions tmux mosh wget leiningen mas git-lfs rbenv bash go ruby openjdk smartmontools ffmpeg cmake tcl-tk python-tk@3.10 python-tk@3.11 python-tk@3.12 python-tk@3.13 python-tk
 
 # - name: Install packages from source
-#   shell: brew install --build-from-source vault
+#   shell: HOMEBREW_CASK_OPTS="--appdir=~/Applications" brew install --build-from-source vault
 
 # - name: Install kubectl
-#   shell: brew install --build-from-source kubectl && brew link --overwrite kubectl
+#   shell: HOMEBREW_CASK_OPTS="--appdir=~/Applications" brew install --build-from-source kubectl && brew link --overwrite kubectl
 
 - name: Install doctl
-  shell: brew install doctl
+  shell: HOMEBREW_CASK_OPTS="--appdir=~/Applications" brew install doctl
 
 - name: Add zsh to /etc/shells
   become: yes
@@ -31,17 +31,14 @@
     name: caskroom/versions
     state: absent
 
-- name: Install emacs-plus
-  shell: brew tap d12frosted/emacs-plus && brew install emacs-plus && brew link emacs-plus
-
 - name: Install fira code
-  shell: brew install --cask font-fira-code font-hack-nerd-font
+  shell: HOMEBREW_CASK_OPTS="--appdir=~/Applications" brew install --force --cask font-fira-code font-hack-nerd-font
 
 - name: Install casks
-  shell: brew install --cask docker displaycal viscosity jumpcut slack istat-menus caffeine discord hyper vagrant firefox papers sensiblesidebuttons dropbox nextcloud geekbench rar skype notion coconutbattery wezterm neovide
+  shell: HOMEBREW_CASK_OPTS="--appdir=~/Applications" brew install --force --cask docker displaycal viscosity jumpcut slack istat-menus caffeine discord hyper vagrant firefox papers sensiblesidebuttons dropbox nextcloud geekbench rar skype notion coconutbattery wezterm neovide
 
 - name: Install Java 11
-  shell: brew install openjdk@11
+  shell: HOMEBREW_CASK_OPTS="--appdir=~/Applications" brew install openjdk@11
 
 - name: Link Java 11
   shell: ln -sfn /usr/local/opt/openjdk@11/libexec/openjdk.jdk /Library/Java/JavaVirtualMachines/openjdk-11.jdk
@@ -53,7 +50,7 @@
     state: present
 
 - name: Install liberica
-  shell: brew install liberica-jdk11-full
+  shell: HOMEBREW_CASK_OPTS="--appdir=~/Applications" brew install liberica-jdk11-full
 
 - name: Install trello
   shell: mas install 1278508951
