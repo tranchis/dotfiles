@@ -72,6 +72,7 @@ else
   export LDFLAGS="${LDFLAGS} -L$(brew --prefix bzip2)/lib"
   export CFLAGS="${CFLAGS} -I$(brew --prefix bzip2)/include"
   export LDFLAGS="${LDFLAGS} -Wl,-rpath,$(brew --prefix openssl)/lib"
+  export LDFLAGS="${LDFLAGS} -L$(brew --prefix boost)"
   export CPPFLAGS="${CPPFLAGS} -I$(brew --prefix openssl)/include"
   export CONFIGURE_OPTS="${CONFIGURE_OPTS} --with-openssl=$(brew --prefix openssl)"
 fi
@@ -122,3 +123,4 @@ if [ -n "${ZSH_DEBUGRC+1}" ]; then
     zprof
 fi
 
+export JAVA_HOME=`/usr/libexec/java_home -v 1.8`
