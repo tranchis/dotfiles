@@ -1,0 +1,116 @@
+---
+- name: Check if dropbox is installed
+  command: dpkg-query -W dropbox
+  register: my_package_check_deb
+  failed_when: my_package_check_deb.rc > 1
+  changed_when: my_package_check_deb.rc == 1
+
+- name: Download dropbox
+  get_url:
+    url: https://www.dropbox.com/download?dl=packages/ubuntu/dropbox_2020.03.04_amd64.deb
+    dest: /tmp/
+  when: my_package_check_deb.rc == 1
+
+- name: Install dropbox
+  apt: deb="/tmp/dropbox_2020.03.04_amd64.deb"
+  become: yes
+  when: my_package_check_deb.rc == 1
+
+- name: Upgrade alacritty repo
+  shell: sudo add-apt-repository ppa:aslatter/ppa -y
+  become: yes
+
+- name: Install base packages
+  package:
+    name: "{{ item }}"
+    state: latest
+  become: yes
+  with_items:
+    - flatpak
+    - steam-devices
+
+- name: Install packages from Internet
+  package:
+    deb: "{{ item }}"
+  become: yes
+  with_items:
+    - https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-x64
+
+- name: Install apps
+  package:
+    name: "{{ item }}"
+    state: latest
+  become: yes
+  with_items:
+    - fonts-firacode
+    - thunderbird
+
+- name: Add flathub repo
+  shell: flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+  become: yes
+
+- name: Install snap apps in classic mode
+  shell: "flatpak install -y {{ item }}"
+  with_items:
+    - com.slack.Slack
+    - com.nextcloud.desktopclient.nextcloud
+    - chat.rocket.RocketChat
+    - com.discordapp.Discord
+    - com.valvesoftware.Steam
+    - com.microsoft.Edge
+    - org.videolan.VLC
+    - com.github.tchx84.Flatseal
+    - com.skype.Client
+    - org.zotero.Zotero
+      # - "flathub com.jetbrains.pycharm-professional"
+      # - "flathub com.jetbrains.IntelliJ-IDEA-Ultimate"
+      # - "flathub com.jetbrains.rubymine"
+
+- name: Scale Steam UI
+  shell: flatpak override --user --env=GDK_SCALE=2 com.valvesoftware.Steam
+
+- name: Set caps as esc
+  shell: gsettings set org.gnome.desktop.input-sources xkb-options "['caps:escape']"
+
+- name: Set smooth scrolling in Firefox
+  ansible.builtin.lineinfile:
+    path: /etc/profile.d/use-xinput2.sh
+    line: export MOZ_USE_XINPUT2=1
+    create: yes
+  become: yes
+
+- name: Download tridactyl
+  get_url:
+    url: https://tridactyl.cmcaine.co.uk/betas/tridactyl-latest.xpi
+    dest: /tmp/tridactyl-latest.xpi
+  register: tridactyl
+
+- name: Install tridactyl
+  shell: DISPLAY=:1.0 xdg-open /tmp/tridactyl-latest.xpi
+  when: tridactyl.changed
+
+- name: Create alacritty config folder
+  file:
+    path: ~/.config/alacritty
+    state: directory
+
+- name: Install alacritty config
+  template:
+    src: alacritty.yml
+    dest: ~/.config/alacritty/alacritty.yml
+
+- name: Force wayland
+  lineinfile:
+    path: /etc/gdm3/custom.conf
+    regexp: '^WaylandEnable='
+    line: WaylandEnable=true
+  become: yes
+
+- name: Update initramfs if needed
+  shell: update-initramfs -c -k all
+  when: sleep_conf.changed or idle_action.changed or idle_time.changed or lid_external_power.changed or lid_external_power_deprecated.changed or lid_battery.changed or lid_battery_deprecated.changed
+  become: yes
+
+- name: Use hybrid graphics mode
+  shell: system76-power graphics hybrid
+  ignore_errors: yes

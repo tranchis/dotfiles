@@ -1,0 +1,17 @@
+---
+- hosts: local
+  roles:
+    - ubuntu2404
+    - { role: ubuntu2404-gui, tags: ['gui'] }
+    - { role: zsh, tags: ['zsh'] }
+    - { role: vim, tags: ['vim'] }
+    - spacemacs
+    - tmux
+    - docker
+    - { role: ubuntu2004-ml, tags: ['ml'] }
+    - lutris
+    - { role: clojure, tags: ['clojure'] }
+    # - { role: hpai, tags: ['hpai'] }
+
+# Needs: ansible-galaxy collection install community.general
+
