@@ -19,10 +19,12 @@
   ignore_errors: yes
 
 - name: Install lazyman
-  shell: ~/.config/nvim-Lazyman/lazyman.sh -q -Q -y
+  shell: timeout 300 ~/.config/nvim-Lazyman/lazyman.sh -q -Q -y
+  retries: 5
 
 - name: Install all packages for lazyman
-  shell: PATH=$PATH:~/.local/bin ~/.local/bin/lazyman -B -q -Q -y
+  shell: PATH=$PATH:~/.local/bin timeout 300 ~/.local/bin/lazyman -B -q -Q -y
+  retries: 5
 
 - name: Install LazyVim configuration
   template:

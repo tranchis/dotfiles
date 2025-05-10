@@ -169,3 +169,9 @@
   shell: sysctl -p
   when: sysctl.changed
   become: yes
+
+- name: Install wezterm configuration
+  template:
+    src: wezterm.lua
+    dest: ~/.wezterm.lua
+

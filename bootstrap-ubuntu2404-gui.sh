@@ -4,7 +4,8 @@
 
 sudo apt-get update
 sudo apt-get upgrade -y
-sudo apt-get install -y ansible
+
+pip install ansible
 
 bash <(curl -s https://gist.githubusercontent.com/alokyadav15/c3a2bbe6089ceff286215113bd092703/raw/3a3dd9af2ec59e4756bee5282e7c1e714dbf7db2/setup_fonts.sh)
 

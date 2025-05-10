@@ -62,6 +62,7 @@
     - com.github.tchx84.Flatseal
     - com.skype.Client
     - org.zotero.Zotero
+    - org.wezfurlong.wezterm
       # - "flathub com.jetbrains.pycharm-professional"
       # - "flathub com.jetbrains.IntelliJ-IDEA-Ultimate"
       # - "flathub com.jetbrains.rubymine"

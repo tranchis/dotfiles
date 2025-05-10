@@ -122,5 +122,3 @@ export NVIM_APPNAME="nvim-LazyVim"
 if [ -n "${ZSH_DEBUGRC+1}" ]; then
     zprof
 fi
-
-export JAVA_HOME=`/usr/libexec/java_home -v 1.8`
