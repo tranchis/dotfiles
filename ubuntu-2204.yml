@@ -7,7 +7,6 @@
     - { role: vim, tags: ['vim'] }
     - spacemacs
     - tmux
-    - docker
     - { role: ubuntu2004-ml, tags: ['ml'] }
     - lutris
     - { role: clojure, tags: ['clojure'] }
