@@ -15,7 +15,7 @@ config.color_scheme = "Palenight (Gogh)"
 
 -- config.font = wezterm.font("JetBrains Mono", { weight = "Bold", italic = true })
 config.font = wezterm.font("JetBrains Mono")
-config.font_size = 14.0
+config.font_size = 16.0
 
 local act = wezterm.action
 
