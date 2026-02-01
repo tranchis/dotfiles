@@ -7,17 +7,25 @@
 
 - name: Download dropbox
   get_url:
-    url: https://www.dropbox.com/download?dl=packages/ubuntu/dropbox_2020.03.04_amd64.deb
+    url: https://www.dropbox.com/download?dl=packages/ubuntu/dropbox_2026.01.15_amd64.deb
     dest: /tmp/
   when: my_package_check_deb.rc == 1
 
 - name: Install dropbox
-  apt: deb="/tmp/dropbox_2020.03.04_amd64.deb"
+  apt: deb="/tmp/dropbox_2026.01.15_amd64.deb"
   become: yes
   when: my_package_check_deb.rc == 1
 
 - name: Upgrade alacritty repo
   shell: sudo add-apt-repository ppa:aslatter/ppa -y
+  become: yes
+
+- name: Upgrade wezterm repo
+  shell: curl -fsSL https://apt.fury.io/wez/gpg.key | sudo gpg --yes --dearmor -o /usr/share/keyrings/wezterm-fury.gpg && echo 'deb [signed-by=/usr/share/keyrings/wezterm-fury.gpg] https://apt.fury.io/wez/ * *' | sudo tee /etc/apt/sources.list.d/wezterm.list && sudo chmod 644 /usr/share/keyrings/wezterm-fury.gpg
+  become: yes
+
+- name: Upgrade repos
+  shell: sudo apt-get update
   become: yes
 
 - name: Install base packages
@@ -28,6 +36,13 @@
   with_items:
     - flatpak
     - steam-devices
+    - steam
+    - wezterm
+
+- name: Install wezterm configuration
+  template:
+    src: wezterm.lua
+    dest: ~/.wezterm.lua
 
 - name: Install packages from Internet
   package:
@@ -50,19 +65,18 @@
   become: yes
 
 - name: Install snap apps in classic mode
-  shell: "flatpak install -y {{ item }}"
+  shell: "flatpak install -y --user {{ item }}"
   with_items:
     - com.slack.Slack
     - com.nextcloud.desktopclient.nextcloud
     - chat.rocket.RocketChat
     - com.discordapp.Discord
-    - com.valvesoftware.Steam
     - com.microsoft.Edge
     - org.videolan.VLC
     - com.github.tchx84.Flatseal
-    - com.skype.Client
     - org.zotero.Zotero
-    - org.wezfurlong.wezterm
+      # - org.wezfurlong.wezterm
+      # - com.valvesoftware.Steam
       # - "flathub com.jetbrains.pycharm-professional"
       # - "flathub com.jetbrains.IntelliJ-IDEA-Ultimate"
       # - "flathub com.jetbrains.rubymine"
@@ -99,13 +113,6 @@
   template:
     src: alacritty.yml
     dest: ~/.config/alacritty/alacritty.yml
-
-- name: Force wayland
-  lineinfile:
-    path: /etc/gdm3/custom.conf
-    regexp: '^WaylandEnable='
-    line: WaylandEnable=true
-  become: yes
 
 - name: Update initramfs if needed
   shell: update-initramfs -c -k all

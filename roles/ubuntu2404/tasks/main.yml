@@ -21,6 +21,15 @@
     - git
     - zsh
     - vim
+    - ripgrep
+    - ccls
+    - xsel
+    - lolcat
+    - ruby-dev
+    - figlet
+    - luarocks
+    - bat
+    - lsd
     - ranger
     - emacs
     - x11-xkb-utils
@@ -30,6 +39,7 @@
     - nodejs
     - libffi-dev
     - libreadline-dev
+    - wl-clipboard
     - libsqlite3-dev
     - exfat-fuse
     - exfatprogs
@@ -99,15 +109,6 @@
   with_items:
     - python3-pip
     - python3-virtualenv
-    - virtualenvwrapper
-
-- name: Install python modules
-  pip:
-    name: "{{ item }}"
-    state: latest
-  become: yes
-  with_items:
-    - virtualenv
     - virtualenvwrapper
 
 - name: Set hibernate timeout
