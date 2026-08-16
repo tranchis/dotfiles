@@ -2,9 +2,10 @@ iwr -useb get.scoop.sh -outfile scoop.ps1
 .\scoop.ps1
 del scoop.ps1
 
+scoop install git
 scoop bucket add extras
 scoop update
-scoop install neovim cwrsync
+scoop install neovim cwrsync wezterm
 winget install JanDeDobbeleer.OhMyPosh -s winget
 
 if (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")) { Start-Process powershell.exe "-NoProfile -ExecutionPolicy Bypass -File `"$PSCommandPath`"" -Verb RunAs; exit }
@@ -30,12 +31,14 @@ Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-L
 
 choco upgrade -y firefox thunderbird pycharm rubymine intellijidea-ultimate whatsapp docker-desktop dropbox hyper vim steam git git-lfs firacode-ttf itunes goggalaxy slack vcxsrv nodejs.install visualstudio2017buildtools
 choco upgrade -y etcher icloud virtualbox winrar virtualbox.extensionpack hwmonitor intelpowergadget adobereader cpu-z jdk8 rocketchat hwinfo intellijidea-ultimate
-choco upgrade -y vlc cmake openssl vscode libreoffice-fresh postman discord octave pyenv-win vagrant nextcloud-client lein razer-synapse-3 forticlientvpn wsl-ubuntu-2204 powertoys
+choco upgrade -y vlc cmake openssl vscode libreoffice-fresh postman discord octave pyenv-win vagrant nextcloud-client lein forticlientvpn wsl-ubuntu-2204 powertoys
 choco install -y mysql --version=5.7.18
 choco install -y anaconda3 --params '"/JustMe /AddToPath"'
 
 dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
 dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
+
+copy wezterm.lua ~/.wezterm.lua
 
 if(!(Test-Path ~/tridactyl.xpi)) {
   Invoke-WebRequest -Uri https://tridactyl.cmcaine.co.uk/betas/tridactyl-latest.xpi -OutFile ~/tridactyl.xpi -UseBasicParsing
@@ -44,5 +47,5 @@ if(!(Test-Path ~/tridactyl.xpi)) {
 
 Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy Unrestricted
 
-Read-Host 'Press Enter to continue�' | Out-Null
+Read-Host 'Press Enter to continue ' | Out-Null
 
