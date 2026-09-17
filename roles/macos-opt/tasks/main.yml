@@ -4,8 +4,11 @@
     name: wagoodman/dive
     state: present
 
+- name: Install fuse-t
+  shell: HOMEBREW_CASK_OPTS="--appdir=~/Applications" brew install macos-fuse-t/homebrew-cask/fuse-t
+
 - name: Install opt apps
-  shell: HOMEBREW_CASK_OPTS="--appdir=~/Applications" brew install dive exiftool htop yarn gnupg postgresql ranger veracrypt
+  shell: HOMEBREW_CASK_OPTS="--appdir=~/Applications" brew install dive exiftool htop yarn gnupg postgresql ranger veracrypt-fuse-t
 
 - name: Install handbrake
   shell: HOMEBREW_CASK_OPTS="--appdir=~/Applications" brew install --cask handbrake
