@@ -21,7 +21,7 @@
   become: yes
 
 - name: Install opt casks
-  shell: HOMEBREW_CASK_OPTS="--appdir=~/Applications" brew install --cask mactex-no-gui balenaetcher sensiblesidebuttons grandperspective vlc postman visual-studio-code bettertouchtool clion pycharm intellij-idea dcp-o-matic lm-studio zotero protege
+  shell: HOMEBREW_CASK_OPTS="--appdir=~/Applications" brew install --cask mactex-no-gui balenaetcher sensiblesidebuttons grandperspective vlc postman visual-studio-code bettertouchtool clion pycharm intellij-idea lm-studio zotero protege crossover macfuse
   register: result
   retries: 30
   until: result is not failed
@@ -44,21 +44,6 @@
 - name: Install Xcode
   shell: mas install 497799835
 
-- name: Install Whatsapp
-  shell: mas install 310633997
-
-- name: Install Notability
-  shell: mas install 360593530
-
-- name: Install pocket extension
-  shell: mas install 1477385213
-
-- name: Install vimium
-  shell: mas install 1480933944
-
-- name: Install NordVPN
-  shell: mas install 905953485
-
 - name: Link to xcode
   shell: xcode-select -s /Applications/Xcode.app/Contents/Developer
   become: yes
@@ -67,10 +52,21 @@
   shell: xcodebuild -license accept
   become: yes
 
+- name: Install Whatsapp
+  shell: mas install 310633997
+
+- name: Install Notability
+  shell: mas install 360593530
+
+- name: Install vimium
+  shell: mas install 1480933944
+
+- name: Install NordVPN
+  shell: mas install 905953485
+
 - name: Install RDP Client
   shell: mas install 1295203466
 
 - name: Install Intellij IDEA
   shell: HOMEBREW_CASK_OPTS="--appdir=~/Applications" brew install --cask intellij-idea
-
 

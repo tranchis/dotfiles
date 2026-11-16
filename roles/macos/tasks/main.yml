@@ -5,7 +5,12 @@
   become: yes
 
 - name: Install packages
-  shell: brew install vim neovim node restic gnu-tar inetutils the_silver_searcher zsh zsh-completions zsh-autosuggestions tmux mosh wget leiningen mas git-lfs rbenv bash go ruby openjdk smartmontools ffmpeg cmake tcl-tk@8 boost rg
+  shell: brew install vim neovim node restic gnu-tar inetutils the_silver_searcher zsh zsh-completions zsh-autosuggestions tmux mosh wget leiningen mas git-lfs rbenv bash go ruby openjdk smartmontools ffmpeg cmake tcl-tk@8 boost rg coreutils ollama uv
+
+- name: Link timeout
+  shell: ln -s /usr/local/bin/gtimeout /usr/local/bin/timeout
+  become: yes
+  ignore_errors: yes
 
 # - name: Install packages from source
 #   shell: HOMEBREW_CASK_OPTS="--appdir=~/Applications" brew install --build-from-source vault
@@ -23,7 +28,7 @@
     line: '/usr/local/bin/zsh'
 
 - name: Change shell
-  become_user: root
+  become: yes
   command: "chsh -s /bin/zsh {{ lookup('env','USER') }}"
 
 - name: Tap versions
@@ -35,25 +40,18 @@
   shell: HOMEBREW_CASK_OPTS="--appdir=~/Applications" brew install --force --cask font-fira-code font-hack-nerd-font
 
 - name: Install casks
-  shell: brew install --cask docker displaycal viscosity jumpcut slack istat-menus caffeine discord hyper vagrant firefox papers sensiblesidebuttons dropbox nextcloud geekbench rar skype notion coconutbattery wezterm neovide xquartz
+  shell: brew install --cask docker displaycal viscosity jumpcut slack istat-menus caffeine discord hyper vagrant firefox papers sensiblesidebuttons dropbox nextcloud geekbench rar notion coconutbattery wezterm neovide xquartz
 
 - name: Install Java 11
   shell: HOMEBREW_CASK_OPTS="--appdir=~/Applications" brew install openjdk@11
 
 - name: Link Java 11
-  shell: ln -sfn /usr/local/opt/openjdk@11/libexec/openjdk.jdk /Library/Java/JavaVirtualMachines/openjdk-11.jdk
+  shell: ln -sfn $(brew --prefix)/opt/openjdk@11/libexec/openjdk.jdk /Library/Java/JavaVirtualMachines/openjdk-11.jdk
   become: yes
 
-- name: Tap liberica
-  homebrew_tap:
-    name: bell-sw/liberica
-    state: present
-
-- name: Install liberica
-  shell: HOMEBREW_CASK_OPTS="--appdir=~/Applications" brew install liberica-jdk11-full
-
-- name: Install trello
-  shell: mas install 1278508951
+- name: Link Java 25
+  shell: ln -sfn $(brew --prefix)/opt/openjdk@25/libexec/openjdk.jdk /Library/Java/JavaVirtualMachines/openjdk-25.jdk
+  become: yes
 
 - name: Install rocket-chat
   shell: mas install 1086818840
